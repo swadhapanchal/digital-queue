@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Application Form - e-Q Service Portal</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #F5F7FA;
+    color: #14213D;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: #0D47A1;
+    color: white;
+
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 45px;
+}
+
+.gov-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.emblem {
+    width: 55px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.gov-text h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.gov-text h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.gov-text p {
+    font-size: 12px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-box {
+    width: 390px;
+    height: 42px;
+
+    background: white;
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-icon {
+    color: #333;
+    font-size: 18px;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile {
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* ================= NAVIGATION ================= */
+
+nav {
+    background: white;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 40px;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+nav a {
+    text-decoration: none;
+    color: #14213D;
+
+    padding: 19px 22px;
+
+    height: 55px;
+
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #0D47A1;
+    background: #F5F8FC;
+}
+
+nav a.active {
+    color: #0D47A1;
+    font-weight: bold;
+
+    border-bottom: 3px solid #0D47A1;
+}
+
+
+/* ================= MAIN ================= */
+
+.container {
+    max-width: 900px;
+
+    margin: 35px auto;
+
+    padding: 0 25px;
+}
+
+
+/* ================= PAGE HEADING ================= */
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.page-heading p {
+    font-size: 14px;
+    color: #697586;
+    line-height: 1.6;
+}
+
+
+/* ================= FORM CARD ================= */
+
+.form-card {
+    background: white;
+
+    border: 1px solid #E1E6ED;
+
+    border-radius: 10px;
+
+    padding: 30px 35px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+
+/* ================= FORM HEADER ================= */
+
+.form-header {
+    background: #0D47A1;
+
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 7px;
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    font-size: 22px;
+}
+
+.form-header p {
+    font-size: 12px;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+
+/* ================= SECTION ================= */
+
+.section-title {
+    font-size: 18px;
+
+    color: #14213D;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #E5E9EE;
+}
+
+
+/* ================= FORM GRID ================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 3px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #344054;
+
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #D32F2F;
+}
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    height: 44px;
+
+    border: 1px solid #CFD8E3;
+
+    border-radius: 5px;
+
+    padding: 10px 13px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: #0D47A1;
+
+    box-shadow:
+        0 0 0 2px rgba(13,71,161,0.08);
+}
+
+
+/* ================= SELECTED SERVICE ================= */
+
+.selected-service {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    background: #F0F6FF;
+
+    border: 1px solid #BFD4EC;
+
+    border-radius: 5px;
+
+    padding: 12px 13px;
+
+    color: #0D47A1;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* ================= INFORMATION BOX ================= */
+
+.info-box {
+
+    background: #F0F6FF;
+
+    border-left: 4px solid #0D47A1;
+
+    padding: 13px 15px;
+
+    margin-bottom: 25px;
+
+    color: #455468;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= DECLARATION ================= */
+
+.declaration {
+
+    background: #F8FAFC;
+
+    border: 1px solid #E1E6ED;
+
+    border-radius: 6px;
+
+    padding: 15px;
+
+    margin-top: 28px;
+}
+
+.declaration label {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+
+    font-size: 12px;
+
+    color: #455468;
+
+    line-height: 1.6;
+
+    cursor: pointer;
+}
+
+.declaration input {
+    margin-top: 3px;
+}
+
+
+/* ================= ERROR ================= */
+
+.error-message {
+
+    display: none;
+
+    background: #FDECEC;
+
+    color: #C62828;
+
+    border: 1px solid #F1CCCC;
+
+    border-radius: 5px;
+
+    padding: 12px 15px;
+
+    margin-top: 20px;
+
+    font-size: 13px;
+}
+
+
+/* ================= BUTTONS ================= */
+
+.buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+button {
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    padding: 0 25px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-btn {
+
+    background: #0D47A1;
+
+    color: white;
+
+    flex: 1;
+}
+
+.submit-btn:hover {
+    background: #1565C0;
+}
+
+.reset-btn {
+
+    background: #687384;
+
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #4F5A68;
+}
+
+.back-btn {
+
+    background: white;
+
+    color: #0D47A1;
+
+    border: 1px solid #0D47A1;
+}
+
+.back-btn:hover {
+    background: #F0F6FF;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    background: #0D47A1;
+
+    color: white;
+
+    margin-top: 45px;
+
+    padding: 35px 50px 20px;
+}
+
+.footer-content {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr 1fr 1fr 1fr 1.2fr;
+
+    gap: 35px;
+}
+
+.footer-column h3 {
+
+    margin-bottom: 15px;
+
+    font-size: 16px;
+}
+
+.footer-column p,
+.footer-column a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+    display: block;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.footer-bottom {
+
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    margin-top: 25px;
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    nav {
+        padding-left: 0;
+        overflow-x: auto;
+    }
+
+    nav a {
+        white-space: nowrap;
+        padding: 19px 14px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .form-card {
+        padding: 22px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="gov-logo">
+
+        <img
+            class="emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="State Emblem of India">
+
+        <div class="gov-text">
+
+            <h2>
+                Government of India
+            </h2>
+
+            <h3>
+            DIGITAL QUEUE
+            </h3>
+
+            <p>
+                Easy. Quick. Transparent.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Search services, documents, offices...">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+    </div>
+
+
+    <div class="profile">
+
+        👤 &nbsp; Login / Profile ▾
+
+    </div>
+
+</header>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <a href="home.html">
+        ⌂ &nbsp; Home
+    </a>
+
+    <a href="service.html" class="active">
+        ▣ &nbsp; Services
+    </a>
+
+    <a href="myapplication.html">
+        ▣ &nbsp; My Applications
+    </a>
+
+    <a href="queue.html">
+        ☷ &nbsp; Queue Status
+    </a>
+
+    <a href="offinfo.html">
+        🏛 &nbsp; Offices
+    </a>
+
+    <a href="#">
+        ? &nbsp; Help
+    </a>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <section class="page-heading">
+
+        <h1>
+            Application Form
+        </h1>
+
+        <p>
+            Enter your details carefully to continue
+            with your selected service.
+        </p>
+
+    </section>
+
+
+    <section class="form-card">
+
+
+        <!-- FORM HEADER -->
+
+        <div class="form-header">
+
+            <h2>
+                Applicant Details
+            </h2>
+
+            <p>
+                Please provide accurate information
+            </p>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-box">
+
+            <strong>Important:</strong>
+
+            After submitting this form, you will be
+            redirected to the location verification page.
+            You must be within 100 meters of the selected
+            Ved Road Branch to continue to QR verification.
+
+        </div>
+
+
+        <!-- SELECTED SERVICE -->
+
+        <div class="form-group">
+
+            <label>
+                Selected Service
+            </label>
+
+            <div
+                class="selected-service"
+                id="selectedService">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <h2 class="section-title">
+
+            Personal Information
+
+        </h2>
+
+
+        <div class="form-grid">
+
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Full Name
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <input
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter your full name">
+
+            </div>
+
+
+            <!-- DATE OF BIRTH -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Date of Birth
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <input
+                    id="dob"
+                    type="date">
+
+            </div>
+
+
+            <!-- GENDER -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Gender
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <select id="gender">
+
+                    <option value="">
+                        -- Select Gender --
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Mobile Number
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <input
+                    id="mobile"
+                    type="tel"
+                    maxlength="10"
+                    placeholder="Enter 10 digit mobile number">
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address">
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= DECLARATION ================= -->
+
+        <div class="declaration">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="declaration">
+
+                <span>
+
+                    I declare that the information provided
+                    by me is true and correct to the best of
+                    my knowledge. I understand that the
+                    submitted information may be verified
+                    by the concerned authority.
+
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <!-- ================= ERROR ================= -->
+
+        <div
+            id="errorMessage"
+            class="error-message">
+
+            Please fill all required fields.
+
+        </div>
+
+
+        <!-- ================= BUTTONS ================= -->
+
+        <div class="buttons">
+
+
+            <button
+                type="button"
+                class="back-btn"
+                onclick="goBack()">
+
+                ← Back
+
+            </button>
+
+
+            <button
+                type="button"
+                class="reset-btn"
+                onclick="resetForm()">
+
+                Clear
+
+            </button>
+
+
+            <button
+                type="button"
+                class="submit-btn"
+                onclick="submitApplication()">
+
+                Continue to Verification →
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                Government of India
+            </div>
+
+            <p>
+                e-Q Service Portal
+            </p>
+
+            <p>
+                © 2026 All Rights Reserved
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Important Links
+            </h3>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                Help Center
+            </a>
+
+            <a href="#">
+                FAQs
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <p>
+                Facebook
+            </p>
+
+            <p>
+                Twitter
+            </p>
+
+            <p>
+                YouTube
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Download Our App
+            </h3>
+
+            <p>
+                Google Play
+            </p>
+
+            <p>
+                App Store
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 e-Q Service Portal.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* =====================================================
+   GET SELECTED SERVICE FROM URL
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const selectedService =
+    params.get("service");
+
+
+/* =====================================================
+   DISPLAY SELECTED SERVICE
+===================================================== */
+
+const serviceBox =
+    document.getElementById(
+        "selectedService"
+    );
+
+
+if (selectedService) {
+
+    serviceBox.innerText =
+        selectedService;
+
+} else {
+
+    serviceBox.innerText =
+        "No service selected";
+
+}
+
+
+/* =====================================================
+   SUBMIT APPLICATION
+===================================================== */
+
+function submitApplication() {
+
+
+    const fullName =
+        document.getElementById(
+            "fullName"
+        ).value.trim();
+
+
+    const dob =
+        document.getElementById(
+            "dob"
+        ).value;
+
+
+    const gender =
+        document.getElementById(
+            "gender"
+        ).value;
+
+
+    const mobile =
+        document.getElementById(
+            "mobile"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const declaration =
+        document.getElementById(
+            "declaration"
+        ).checked;
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    errorMessage.style.display =
+        "none";
+
+
+    /* SERVICE CHECK */
+
+    if (!selectedService) {
+
+        errorMessage.innerText =
+            "No service selected. Please go back and select a service.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* REQUIRED FIELD CHECK */
+
+    if (
+        fullName === "" ||
+        dob === "" ||
+        gender === "" ||
+        mobile === ""
+    ) {
+
+        errorMessage.innerText =
+            "Please fill all required fields.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* MOBILE CHECK */
+
+    if (
+        mobile.length !== 10 ||
+        isNaN(mobile)
+    ) {
+
+        errorMessage.innerText =
+            "Please enter a valid 10 digit mobile number.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* DECLARATION CHECK */
+
+    if (!declaration) {
+
+        errorMessage.innerText =
+            "Please accept the declaration before continuing.";
+
+        errorMessage.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* CREATE APPLICATION ID */
+
+    const applicationId =
+        "APP-" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    /* APPLICATION DATA */
+
+    const applicationData = {
+
+        applicationId:
+            applicationId,
+
+        service:
+            selectedService,
+
+        fullName:
+            fullName,
+
+        dob:
+            dob,
+
+        gender:
+            gender,
+
+        mobile:
+            mobile,
+
+        email:
+            email,
+
+        office:
+            "Ved Road Branch",
+
+        status:
+            "Submitted",
+
+        date:
+            new Date().toLocaleDateString()
+
+    };
+
+
+    /* SAVE CURRENT APPLICATION */
+
+    localStorage.setItem(
+        "currentApplication",
+
+        JSON.stringify(
+            applicationData
+        )
+    );
+
+
+    /* SAVE APPLICATION HISTORY */
+
+    let applications =
+        JSON.parse(
+            localStorage.getItem(
+                "applications"
+            )
+        ) || [];
+
+
+    applications.push(
+        applicationData
+    );
+
+
+    localStorage.setItem(
+        "applications",
+
+        JSON.stringify(
+            applications
+        )
+    );
+
+
+    /* GO TO CONFIRMATION PAGE */
+
+    window.location.href =
+        "conformation.html";
+
+}
+
+
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm() {
+
+    document.getElementById(
+        "fullName"
+    ).value = "";
+
+
+    document.getElementById(
+        "dob"
+    ).value = "";
+
+
+    document.getElementById(
+        "gender"
+    ).value = "";
+
+
+    document.getElementById(
+        "mobile"
+    ).value = "";
+
+
+    document.getElementById(
+        "email"
+    ).value = "";
+
+
+    document.getElementById(
+        "declaration"
+    ).checked = false;
+
+
+    document.getElementById(
+        "errorMessage"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   BACK TO SERVICES
+===================================================== */
+
+function goBack() {
+
+    window.location.href =
+        "service.html";
+
+}
+
+</script>
+
+
+</body>
+</html>

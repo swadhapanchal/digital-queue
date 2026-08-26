@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>My Applications - e-Q Service Portal</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #F5F7FA;
+    color: #14213D;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    background: #0D47A1;
+    color: white;
+
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 45px;
+}
+
+
+/* GOVERNMENT LOGO */
+
+.gov-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.emblem {
+    width: 55px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.gov-text h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.gov-text h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.gov-text p {
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: 390px;
+    height: 42px;
+
+    background: white;
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 14px;
+}
+
+.search-icon {
+    color: #333;
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile {
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav {
+    background: white;
+
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 40px;
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.08);
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #14213D;
+
+    padding: 19px 22px;
+
+    height: 55px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #0D47A1;
+    background: #F5F8FC;
+}
+
+nav a.active {
+    color: #0D47A1;
+
+    font-weight: bold;
+
+    border-bottom:
+        3px solid #0D47A1;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.container {
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    padding: 0 25px;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-size: 28px;
+
+    color: #14213D;
+
+    margin-bottom: 7px;
+}
+
+.page-heading p {
+    color: #697586;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SUMMARY CARDS
+===================================================== */
+
+.summary-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #E1E6ED;
+
+    border-radius: 9px;
+
+    padding: 20px;
+
+    position: relative;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.04);
+}
+
+.summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+    background: #0D47A1;
+
+    border-radius:
+        9px 0 0 9px;
+}
+
+.summary-label {
+    color: #697586;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+.summary-number {
+    color: #0D47A1;
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+.summary-icon {
+    position: absolute;
+
+    right: 20px;
+    top: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    background: #EDF5FD;
+
+    color: #0D47A1;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   HISTORY CARD
+===================================================== */
+
+.history-card {
+    background: white;
+
+    border: 1px solid #E1E6ED;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.04);
+}
+
+
+/* HISTORY HEADER */
+
+.history-header {
+    min-height: 75px;
+
+    padding: 15px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #E5E9EE;
+}
+
+.history-title h2 {
+    font-size: 19px;
+
+    color: #14213D;
+}
+
+.history-title p {
+    font-size: 12px;
+
+    color: #7A8492;
+
+    margin-top: 4px;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filter-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.filter-area label {
+    color: #697586;
+
+    font-size: 12px;
+}
+
+.filter-area select {
+    min-width: 145px;
+
+    padding: 8px 11px;
+
+    border:
+        1px solid #CBD5DF;
+
+    border-radius: 5px;
+
+    background: white;
+
+    outline: none;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.filter-area select:focus {
+    border-color: #0D47A1;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 900px;
+}
+
+th {
+    background: #F4F7FA;
+
+    color: #455468;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-align: left;
+
+    padding: 14px 16px;
+
+    border-bottom:
+        1px solid #E2E7ED;
+
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px;
+
+    font-size: 12px;
+
+    color: #344054;
+
+    border-bottom:
+        1px solid #EDF0F3;
+}
+
+tbody tr:hover {
+    background: #F8FBFE;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* TOKEN */
+
+.token {
+    color: #0D47A1;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.completed {
+    background: #EAF7ED;
+
+    color: #2E7D32;
+
+    border: 1px solid #C9E9CF;
+}
+
+.waiting {
+    background: #FFF5DF;
+
+    color: #A85B00;
+
+    border: 1px solid #F2DFB0;
+}
+
+.cancelled {
+    background: #FDECEC;
+
+    color: #C62828;
+
+    border: 1px solid #F1CCCC;
+}
+
+.submitted {
+    background: #EAF2FC;
+
+    color: #0D47A1;
+
+    border: 1px solid #C9DDF5;
+}
+
+
+/* =====================================================
+   VIEW BUTTON
+===================================================== */
+
+.view-button {
+    background: white;
+
+    color: #0D47A1;
+
+    border:
+        1px solid #0D47A1;
+
+    border-radius: 5px;
+
+    padding: 6px 13px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.view-button:hover {
+    background: #0D47A1;
+
+    color: white;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+#emptyState {
+    display: none;
+
+    text-align: center;
+
+    padding: 55px 20px;
+
+    color: #697586;
+}
+
+.empty-icon {
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+.empty-title {
+    color: #14213D;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+
+/* =====================================================
+   FEATURE STRIP
+===================================================== */
+
+.feature-strip {
+    margin-top: 30px;
+
+    background: #F7FAFF;
+
+    border:
+        1px solid #E0E8F1;
+
+    border-radius: 8px;
+
+    min-height: 84px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    align-items: center;
+}
+
+.feature {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 10px 20px;
+
+    border-right:
+        1px solid #DFE5EC;
+}
+
+.feature:last-child {
+    border-right: none;
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+
+    background: #EDF5FD;
+
+    color: #1261A0;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.feature-title {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #243044;
+
+    margin-bottom: 4px;
+}
+
+.feature-text {
+    font-size: 10px;
+
+    color: #687384;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    background: #0D47A1;
+
+    color: white;
+
+    margin-top: 45px;
+
+    padding: 35px 50px 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr 1fr 1fr 1fr 1.2fr;
+
+    gap: 35px;
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+
+    font-size: 16px;
+}
+
+.footer-column p,
+.footer-column a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+    display: block;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.footer-bottom {
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    margin-top: 25px;
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 20px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    nav {
+        padding-left: 0;
+
+        overflow-x: auto;
+    }
+
+    nav a {
+        white-space: nowrap;
+
+        padding: 19px 14px;
+    }
+
+    .summary-container {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .feature-strip {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .summary-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .history-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .filter-area {
+        width: 100%;
+    }
+
+    .filter-area select {
+        flex: 1;
+    }
+
+    .feature-strip {
+        grid-template-columns:
+            1fr;
+    }
+
+    .feature {
+        border-right: none;
+
+        border-bottom:
+            1px solid #DFE5EC;
+    }
+
+    .footer-content {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+
+    <!-- GOVERNMENT BRAND -->
+
+    <div class="gov-logo">
+
+        <img
+            class="emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="State Emblem of India">
+
+        <div class="gov-text">
+
+            <h2>
+                Government of India
+            </h2>
+
+            <h3>
+                DIGITAL QUEUE
+            </h3>
+
+            <p>
+                Easy. Quick. Transparent.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Search services, documents, offices...">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+    </div>
+
+
+
+    <!-- PROFILE -->
+
+    <div
+        class="profile"
+        onclick="goToProfile()"
+    >
+
+        👤 &nbsp; Login / Profile ▾
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+
+    <!-- HOME -->
+
+    <a href="home.html">
+
+        ⌂ &nbsp; Home
+
+    </a>
+
+
+    <!-- SERVICES -->
+
+    <a href="service.html">
+
+        ▣ &nbsp; Services ▾
+
+    </a>
+
+
+    <!-- MY APPLICATIONS - ACTIVE -->
+
+    <a
+        href="myapplication.html"
+        class="active"
+    >
+
+        ▣ &nbsp; My Applications
+
+    </a>
+
+
+    <!-- QUEUE STATUS -->
+
+    <a href="queue.html">
+
+        ☷ &nbsp; Queue Status
+
+    </a>
+
+
+    <!-- OFFICES -->
+
+    <a href="offinfo.html">
+
+        🏛 &nbsp; Offices
+
+    </a>
+
+    <!-- HELP -->
+
+    <a href="#">
+
+        ? &nbsp; Help
+
+    </a>
+
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- PAGE HEADING -->
+
+    <section class="page-heading">
+
+        <h1>
+            My Applications
+        </h1>
+
+        <p>
+            View and track all your previous service
+            applications and queue bookings.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
+
+    <section class="summary-container">
+
+
+        <!-- TOTAL -->
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Total Applications
+            </div>
+
+            <div
+                class="summary-number"
+                id="totalApplications"
+            >
+                0
+            </div>
+
+            <div class="summary-icon">
+                ▢
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED -->
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Completed
+            </div>
+
+            <div
+                class="summary-number"
+                id="completedApplications"
+            >
+                0
+            </div>
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+        </div>
+
+
+
+        <!-- CANCELLED -->
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Cancelled
+            </div>
+
+            <div
+                class="summary-number"
+                id="cancelledApplications"
+            >
+                0
+            </div>
+
+            <div class="summary-icon">
+                ×
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         APPLICATION HISTORY
+    ================================================== -->
+
+    <section class="history-card">
+
+
+        <!-- HISTORY HEADER -->
+
+        <div class="history-header">
+
+
+            <div class="history-title">
+
+                <h2>
+                    Application History
+                </h2>
+
+                <p>
+                    Your previous applications and queue bookings
+                </p>
+
+            </div>
+
+
+
+            <!-- FILTER -->
+
+            <div class="filter-area">
+
+                <label>
+                    Filter:
+                </label>
+
+                <select
+                    id="statusFilter"
+                    onchange="filterApplications()"
+                >
+
+                    <option value="ALL">
+                        All
+                    </option>
+
+                    <option value="COMPLETED">
+                        Completed
+                    </option>
+
+                    <option value="WAITING">
+                        Waiting
+                    </option>
+
+                    <option value="CANCELLED">
+                        Cancelled
+                    </option>
+
+                    <option value="SUBMITTED">
+                        Submitted
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            TOKEN
+                        </th>
+
+                        <th>
+                            OFFICE
+                        </th>
+
+                        <th>
+                            SERVICE
+                        </th>
+
+                        <th>
+                            DATE
+                        </th>
+
+                        <th>
+                            TIME
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody id="applicationTableBody">
+
+
+                    <!-- SAMPLE RECORD 1 -->
+
+                    <tr data-status="COMPLETED">
+
+                        <td class="token">
+                            D-45
+                        </td>
+
+                        <td>
+                            Ved Road Branch
+                        </td>
+
+                        <td>
+                            Document Verification
+                        </td>
+
+                        <td>
+                            22 Aug 2026
+                        </td>
+
+                        <td>
+                            10:30 AM
+                        </td>
+
+                        <td>
+
+                            <span class="status completed">
+                                COMPLETED
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="viewApplication('D-45')"
+                            >
+
+                                VIEW
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- SAMPLE RECORD 2 -->
+
+                    <tr data-status="COMPLETED">
+
+                        <td class="token">
+                            D-31
+                        </td>
+
+                        <td>
+                            Ved Road Branch
+                        </td>
+
+                        <td>
+                            Certificate Service
+                        </td>
+
+                        <td>
+                            15 Aug 2026
+                        </td>
+
+                        <td>
+                            02:15 PM
+                        </td>
+
+                        <td>
+
+                            <span class="status completed">
+                                COMPLETED
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="viewApplication('D-31')"
+                            >
+
+                                VIEW
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- SAMPLE RECORD 3 -->
+
+                    <tr data-status="CANCELLED">
+
+                        <td class="token">
+                            D-18
+                        </td>
+
+                        <td>
+                            Ved Road Branch
+                        </td>
+
+                        <td>
+                            Document Submission
+                        </td>
+
+                        <td>
+                            05 Aug 2026
+                        </td>
+
+                        <td>
+                            11:00 AM
+                        </td>
+
+                        <td>
+
+                            <span class="status cancelled">
+                                CANCELLED
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="viewApplication('D-18')"
+                            >
+
+                                VIEW
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- SAMPLE RECORD 4 -->
+
+                    <tr data-status="WAITING">
+
+                        <td class="token">
+                            D-52
+                        </td>
+
+                        <td>
+                            Ved Road Branch
+                        </td>
+
+                        <td>
+                            Application Service
+                        </td>
+
+                        <td>
+                            01 Aug 2026
+                        </td>
+
+                        <td>
+                            09:45 AM
+                        </td>
+
+                        <td>
+
+                            <span class="status waiting">
+                                WAITING
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="viewApplication('D-52')"
+                            >
+
+                                VIEW
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+
+        <!-- EMPTY STATE -->
+
+        <div id="emptyState">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <div class="empty-title">
+                No Applications Found
+            </div>
+
+            <p>
+                There are no applications for
+                the selected status.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FEATURE STRIP
+    ================================================== -->
+
+    <section class="feature-strip">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ♢
+            </div>
+
+            <div>
+
+                <div class="feature-title">
+                    Secure & Trusted
+                </div>
+
+                <div class="feature-text">
+                    Your data is safe with us
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◉
+            </div>
+
+            <div>
+
+                <div class="feature-title">
+                    Transparent Process
+                </div>
+
+                <div class="feature-text">
+                    Track every step online
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◷
+            </div>
+
+            <div>
+
+                <div class="feature-title">
+                    Save Time
+                </div>
+
+                <div class="feature-text">
+                    No more long queues
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◎
+            </div>
+
+            <div>
+
+                <div class="feature-title">
+                    Anywhere Access
+                </div>
+
+                <div class="feature-text">
+                    Access services anytime
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                Government of India
+            </div>
+
+            <p>
+                e-Q Service Portal
+            </p>
+
+            <p>
+                © 2026 All Rights Reserved
+            </p>
+
+        </div>
+
+
+
+        <!-- IMPORTANT LINKS -->
+
+        <div class="footer-column">
+
+            <h3>
+                Important Links
+            </h3>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+        </div>
+
+
+
+        <!-- SUPPORT -->
+
+        <div class="footer-column">
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                Help Center
+            </a>
+
+            <a href="#">
+                FAQs
+            </a>
+
+        </div>
+
+
+
+        <!-- FOLLOW -->
+
+        <div class="footer-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <p>
+                Facebook
+            </p>
+
+            <p>
+                Twitter
+            </p>
+
+            <p>
+                YouTube
+            </p>
+
+        </div>
+
+
+
+        <!-- APP -->
+
+        <div class="footer-column">
+
+            <h3>
+                Download Our App
+            </h3>
+
+            <p>
+                Google Play
+            </p>
+
+            <p>
+                App Store
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        © 2026 e-Q Service Portal.
+        All Rights Reserved.
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   UPDATE SUMMARY
+===================================================== */
+
+function updateSummary() {
+
+    const rows =
+        document.querySelectorAll(
+            "#applicationTableBody tr"
+        );
+
+
+    let total = 0;
+
+    let completed = 0;
+
+    let cancelled = 0;
+
+
+    rows.forEach(function(row) {
+
+        const status =
+            row.getAttribute(
+                "data-status"
+            );
+
+
+        if (!status) {
+            return;
+        }
+
+
+        total++;
+
+
+        if (
+            status === "COMPLETED"
+        ) {
+
+            completed++;
+
+        }
+
+
+        if (
+            status === "CANCELLED"
+        ) {
+
+            cancelled++;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalApplications"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "completedApplications"
+    ).innerText = completed;
+
+
+    document.getElementById(
+        "cancelledApplications"
+    ).innerText = cancelled;
+
+}
+
+
+
+/* =====================================================
+   FILTER APPLICATIONS
+===================================================== */
+
+function filterApplications() {
+
+    const selectedStatus =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const rows =
+        document.querySelectorAll(
+            "#applicationTableBody tr"
+        );
+
+
+    let visibleRows = 0;
+
+
+    rows.forEach(function(row) {
+
+        const rowStatus =
+            row.getAttribute(
+                "data-status"
+            );
+
+
+        if (
+            selectedStatus === "ALL" ||
+            rowStatus === selectedStatus
+        ) {
+
+            row.style.display = "";
+
+            visibleRows++;
+
+        }
+
+        else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    if (visibleRows === 0) {
+
+        emptyState.style.display =
+            "block";
+
+    }
+
+    else {
+
+        emptyState.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   VIEW APPLICATION
+===================================================== */
+
+function viewApplication(token) {
+
+    alert(
+        "Application Token: " +
+        token +
+        "\n\n" +
+        "Application details will be displayed here."
+    );
+
+}
+
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function goToProfile() {
+
+    alert(
+        "Profile page will open here."
+    );
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        updateSummary();
+
+        filterApplications();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

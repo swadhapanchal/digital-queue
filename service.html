@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Services - Digital Queue</title>
+
+<style>
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #F5F7FA;
+    color: #14213D;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: #0D47A1;
+    color: white;
+
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 45px;
+}
+
+
+/* ================= GOVERNMENT LOGO ================= */
+
+.gov-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* IMPORTANT:
+   No white background here.
+   This gives the second logo style.
+*/
+
+.emblem {
+    width: 65px;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+
+.gov-text h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.gov-text h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.gov-text p {
+    font-size: 12px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-box {
+    width: 390px;
+    height: 42px;
+
+    background: white;
+
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 14px;
+
+    color: #14213D;
+}
+
+.search-icon {
+    color: #333;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile {
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* ================= NAVIGATION ================= */
+
+nav {
+    background: white;
+
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 40px;
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.08);
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #14213D;
+
+    padding: 19px 22px;
+
+    height: 55px;
+
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #0D47A1;
+}
+
+nav a.active {
+    color: #0D47A1;
+
+    font-weight: bold;
+
+    border-bottom:
+        3px solid #0D47A1;
+}
+
+
+/* ================= MAIN CONTAINER ================= */
+
+.container {
+    max-width: 1100px;
+
+    margin: 40px auto;
+
+    padding: 0 25px;
+}
+
+
+/* ================= PAGE TITLE ================= */
+
+.page-title {
+    background: #0D47A1;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 18px;
+
+    border-radius: 7px;
+
+    margin-bottom: 30px;
+}
+
+.page-title h1 {
+    font-size: 27px;
+}
+
+
+/* ================= PAGE DESCRIPTION ================= */
+
+.page-description {
+    margin-bottom: 25px;
+}
+
+.page-description h2 {
+    font-size: 21px;
+
+    margin-bottom: 8px;
+}
+
+.page-description p {
+    color: #697586;
+
+    font-size: 14px;
+}
+
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result {
+
+    display: none;
+
+    background: #EAF2FF;
+
+    border-left:
+        4px solid #0D47A1;
+
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+
+    color: #344054;
+
+    font-size: 14px;
+}
+
+
+/* ================= SERVICE GRID ================= */
+
+.service-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+
+/* ================= SERVICE CARD ================= */
+
+.service-card {
+    background: white;
+
+    border:
+        1px solid #E1E6ED;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.06);
+
+    transition: 0.2s;
+}
+
+.service-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.10);
+}
+
+.service-card h2 {
+
+    color: #0D47A1;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+}
+
+.service-card p {
+
+    color: #697586;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-bottom: 10px;
+}
+
+.service-card strong {
+
+    color: #14213D;
+}
+
+
+/* ================= APPLY BUTTON ================= */
+
+.apply-btn {
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+    background: #0D47A1;
+
+    color: white;
+
+    border: none;
+
+    padding: 11px 25px;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.apply-btn:hover {
+
+    background: #1565C0;
+}
+
+
+/* ================= NO RESULT ================= */
+
+.no-result {
+
+    display: none;
+
+    background: white;
+
+    border:
+        1px solid #E1E6ED;
+
+    border-radius: 10px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: #697586;
+
+    font-size: 15px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    background: #0D47A1;
+
+    color: white;
+
+    margin-top: 50px;
+
+    padding: 35px 50px 20px;
+}
+
+.footer-content {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+.footer-column {
+
+    flex: 1;
+}
+
+.footer-column h3 {
+
+    margin-bottom: 15px;
+
+    font-size: 16px;
+}
+
+.footer-column p,
+.footer-column a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    display: block;
+}
+
+.footer-column a:hover {
+
+    text-decoration: underline;
+}
+
+.footer-logo {
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.footer-bottom {
+
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    margin-top: 25px;
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 800px) {
+
+    header {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 20px;
+    }
+
+    .search-box {
+
+        width: 100%;
+    }
+
+    nav {
+
+        padding-left: 0;
+
+        overflow-x: auto;
+    }
+
+    nav a {
+
+        white-space: nowrap;
+
+        padding: 19px 14px;
+    }
+
+    .service-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+
+    <!-- GOVERNMENT LOGO -->
+
+    <div class="gov-logo">
+
+
+        <img
+            class="emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Ashoka Emblem">
+
+
+        <div class="gov-text">
+
+            <h2>
+                Government of India
+            </h2>
+
+            <h3>
+                Digital Queue
+            </h3>
+
+            <p>
+                Easy. Quick. Transparent.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= SEARCH BAR ================= -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search services, documents, offices..."
+            autocomplete="off">
+
+        <span
+            class="search-icon"
+            onclick="performSearch()">
+
+            🔍
+
+        </span>
+
+    </div>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <div
+        class="profile"
+        onclick="openProfile()">
+
+        👤 &nbsp; Login / Profile ▾
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+
+    <a href="home.html">
+
+        ⌂ &nbsp; Home
+
+    </a>
+
+
+    <a
+        href="service.html"
+        class="active">
+
+        ▣ &nbsp; Services
+
+    </a>
+
+
+    <a href="myapplication.html">
+
+        ▣ &nbsp; My Applications
+
+    </a>
+
+
+    <a href="queue.html">
+
+        ☷ &nbsp; Queue Status
+
+    </a>
+
+
+    <a href="offinfo.html">
+
+        🏛 &nbsp; Offices
+
+    </a>
+
+
+    <a href="#">
+
+        ☎ &nbsp; Contact Us
+
+    </a>
+
+
+    <a href="#">
+
+        ? &nbsp; Help
+
+    </a>
+
+
+</nav>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <h1>
+            Government Services
+        </h1>
+
+    </div>
+
+
+    <!-- DESCRIPTION -->
+
+    <div class="page-description">
+
+        <h2>
+            Available Services
+        </h2>
+
+        <p>
+            Select the service you require and click
+            Apply to continue with your application.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH RESULT -->
+
+    <div
+        class="search-result"
+        id="searchResult">
+
+    </div>
+
+
+    <!-- ================= SERVICE GRID ================= -->
+
+    <div
+        class="service-grid"
+        id="serviceGrid">
+
+
+        <!-- ================= AADHAAR ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                aadhaar
+                aadhar
+                aadhaar card
+                identity
+                address proof
+                update
+                correction
+            ">
+
+            <h2>
+                Aadhaar Card
+            </h2>
+
+            <p>
+                Apply for Aadhaar related services,
+                updates and corrections.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Identity proof and address proof.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Citizens requiring Aadhaar services.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                Indian residents eligible for Aadhaar.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('Aadhaar Card')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= PAN CARD ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                pan
+                pan card
+                pancard
+                identity proof
+                date of birth
+                tax
+            ">
+
+            <h2>
+                PAN Card
+            </h2>
+
+            <p>
+                Apply for a new PAN card or
+                PAN related services.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Identity proof and date of birth proof.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Citizens requiring PAN services.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                Eligible Indian citizens and entities.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('PAN Card')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= RATION CARD ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                ration
+                ration card
+                food
+                family
+                household
+                identity
+            ">
+
+            <h2>
+                Ration Card
+            </h2>
+
+            <p>
+                Apply for a new ration card or
+                update existing ration card details.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Identity and family-related documents.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Eligible households.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                As per applicable government rules.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('Ration Card')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= BIRTH CERTIFICATE ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                birth
+                birth certificate
+                certificate
+                newborn
+                child
+                registration
+            ">
+
+            <h2>
+                Birth Certificate
+            </h2>
+
+            <p>
+                Apply for a birth certificate
+                or related corrections.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Birth and identity related documents.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Parents or authorized applicants.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                Applicants eligible under
+                registration rules.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('Birth Certificate')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= CASTE CERTIFICATE ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                caste
+                caste certificate
+                identity
+                supporting
+                certificate
+            ">
+
+            <h2>
+                Caste Certificate
+            </h2>
+
+            <p>
+                Apply for a caste certificate
+                for official purposes.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Identity and supporting caste documents.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Eligible applicants requiring certification.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                As per applicable government rules.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('Caste Certificate')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= INCOME CERTIFICATE ================= -->
+
+        <div
+            class="service-card"
+            data-search="
+                income
+                income certificate
+                salary
+                financial
+                proof
+            ">
+
+            <h2>
+                Income Certificate
+            </h2>
+
+            <p>
+                Apply for an income certificate
+                for official and government purposes.
+            </p>
+
+            <p>
+
+                <strong>
+                    Documents:
+                </strong>
+
+                Identity and income-related documents.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Required for:
+                </strong>
+
+                Applicants requiring income verification.
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Eligibility:
+                </strong>
+
+                Eligible residents as per
+                applicable rules.
+
+            </p>
+
+
+            <button
+                class="apply-btn"
+                onclick="applyService('Income Certificate')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= NO RESULT ================= -->
+
+    <div
+        class="no-result"
+        id="noResult">
+
+        <strong>
+            No services found.
+        </strong>
+
+        <br><br>
+
+        Try searching for another service,
+        document or keyword.
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                Government of India
+            </div>
+
+            <p>
+                Digital Queue
+            </p>
+
+            <p>
+                © 2026 All Rights Reserved
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Important Links
+            </h3>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                Help Center
+            </a>
+
+            <a href="#">
+                FAQs
+            </a>
+
+            <a href="#">
+                Contact Us
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <p>
+                Facebook
+            </p>
+
+            <p>
+                Twitter
+            </p>
+
+            <p>
+                YouTube
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Download Our App
+            </h3>
+
+            <p>
+                Google Play
+            </p>
+
+            <p>
+                App Store
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Digital Queue.
+        All Rights Reserved.
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* =====================================================
+   GET SEARCH ELEMENTS
+===================================================== */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const serviceCards =
+    document.querySelectorAll(".service-card");
+
+const searchResult =
+    document.getElementById("searchResult");
+
+const noResult =
+    document.getElementById("noResult");
+
+
+/* =====================================================
+   SEARCH WHILE TYPING
+===================================================== */
+
+searchInput.addEventListener(
+    "input",
+    function() {
+
+        performSearch();
+
+    }
+);
+
+
+/* =====================================================
+   SEARCH FUNCTION
+===================================================== */
+
+function performSearch() {
+
+
+    const searchText =
+        searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    let foundServices = 0;
+
+
+    /* ================= EMPTY SEARCH ================= */
+
+    if (searchText === "") {
+
+
+        serviceCards.forEach(
+            function(card) {
+
+                card.style.display =
+                    "block";
+
+            }
+        );
+
+
+        searchResult.style.display =
+            "none";
+
+
+        noResult.style.display =
+            "none";
+
+
+        return;
+
+    }
+
+
+    /* ================= SEARCH ================= */
+
+    serviceCards.forEach(
+        function(card) {
+
+
+            const searchableText =
+                card
+                .getAttribute("data-search")
+                .toLowerCase();
+
+
+            if (
+                searchableText.includes(
+                    searchText
+                )
+            ) {
+
+
+                card.style.display =
+                    "block";
+
+
+                foundServices++;
+
+
+            } else {
+
+
+                card.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* ================= RESULTS FOUND ================= */
+
+    if (foundServices > 0) {
+
+
+        searchResult.style.display =
+            "block";
+
+
+        searchResult.innerHTML =
+            "<strong>" +
+            foundServices +
+            "</strong> service(s) found for " +
+            "<strong>\"" +
+            searchInput.value +
+            "\"</strong>";
+
+
+        noResult.style.display =
+            "none";
+
+
+    }
+
+
+    /* ================= NO RESULTS ================= */
+
+    else {
+
+
+        searchResult.style.display =
+            "none";
+
+
+        noResult.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY SERVICE
+===================================================== */
+
+function applyService(service) {
+
+
+    const isLoggedIn =
+        localStorage.getItem(
+            "isLoggedIn"
+        );
+
+
+    /* ================= LOGGED IN ================= */
+
+    if (
+        isLoggedIn === "true"
+    ) {
+
+
+        window.location.href =
+            "application.html?service=" +
+            encodeURIComponent(
+                service
+            );
+
+
+        return;
+
+    }
+
+
+    /* ================= NOT LOGGED IN ================= */
+
+    localStorage.setItem(
+        "requestedService",
+        service
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function openProfile() {
+
+
+    const isLoggedIn =
+        localStorage.getItem(
+            "isLoggedIn"
+        );
+
+
+    if (
+        isLoggedIn === "true"
+    ) {
+
+
+        alert(
+            "You are already logged in."
+        );
+
+
+    } else {
+
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

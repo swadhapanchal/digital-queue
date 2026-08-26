@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Login / Registration - Digital Queue</title>
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ================= BODY ================= */
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #F5F7FA;
+
+    color: #14213D;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+
+    width: 450px;
+
+    max-width: 92%;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 10px;
+
+    border: 1px solid #E1E6ED;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.10);
+}
+
+
+/* ================= LOGO ================= */
+
+.logo {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.logo img {
+
+    width: 70px;
+
+    height: 75px;
+
+    object-fit: contain;
+
+    margin-bottom: 8px;
+}
+
+.logo h1 {
+
+    color: #0D47A1;
+
+    font-size: 28px;
+
+    margin-bottom: 5px;
+}
+
+.logo p {
+
+    color: #697586;
+
+    font-size: 13px;
+}
+
+.gov-label {
+
+    color: #14213D;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+}
+
+
+/* ================= FORM ================= */
+
+.form {
+
+    display: none;
+}
+
+.form.active {
+
+    display: block;
+}
+
+.form h2 {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+
+    color: #14213D;
+
+    font-size: 21px;
+}
+
+
+/* ================= INPUT ================= */
+
+.input-group {
+
+    margin-bottom: 17px;
+}
+
+.input-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #344054;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+.input-group input {
+
+    width: 100%;
+
+    height: 45px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #CFD8E3;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.input-group input:focus {
+
+    border-color: #0D47A1;
+
+    box-shadow:
+        0 0 0 2px rgba(13,71,161,0.08);
+}
+
+
+/* ================= FORGOT ================= */
+
+.forgot {
+
+    text-align: right;
+
+    margin-bottom: 18px;
+}
+
+.forgot a,
+.switch a,
+.terms a {
+
+    color: #0D47A1;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.forgot a:hover,
+.switch a:hover,
+.terms a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* ================= BUTTON ================= */
+
+.btn {
+
+    width: 100%;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #0D47A1;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn:hover {
+
+    background: #1565C0;
+}
+
+
+/* ================= SWITCH ================= */
+
+.switch {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #697586;
+
+    font-size: 13px;
+}
+
+
+/* ================= TERMS ================= */
+
+.terms {
+
+    font-size: 12px;
+
+    color: #697586;
+
+    margin: 15px 0;
+
+    line-height: 1.6;
+}
+
+.terms input {
+
+    margin-right: 5px;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #E5E9EE;
+
+    font-size: 12px;
+
+    color: #697586;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 480px) {
+
+    .container {
+
+        padding: 25px;
+    }
+
+    .logo h1 {
+
+        font-size: 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================= LOGO ================= -->
+
+    <div class="logo">
+
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Ashoka Emblem">
+
+        <h1>
+            Digital Queue
+        </h1>
+
+        <p>
+            e-Q Service Portal
+        </p>
+
+        <div class="gov-label">
+            Government of India
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOGIN FORM ================= -->
+
+    <div
+        class="form active"
+        id="loginForm">
+
+
+        <h2>
+            Login
+        </h2>
+
+
+        <form onsubmit="login(event)">
+
+
+            <div class="input-group">
+
+                <label for="loginUser">
+                    Mobile Number / Email
+                </label>
+
+                <input
+                    type="text"
+                    id="loginUser"
+                    placeholder="Enter mobile number or email"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    required>
+
+            </div>
+
+
+            <div class="forgot">
+
+                <a
+                    href="#"
+                    onclick="forgotPassword()">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn">
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <div class="switch">
+
+            Don't have an account?
+
+            <a
+                href="#"
+                onclick="showRegister()">
+
+                Register
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= REGISTER FORM ================= -->
+
+    <div
+        class="form"
+        id="registerForm">
+
+
+        <h2>
+            Create Account
+        </h2>
+
+
+        <form onsubmit="register(event)">
+
+
+            <div class="input-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="mobile">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="Enter mobile number"
+                    maxlength="10"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="registerPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create a password"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required>
+
+            </div>
+
+
+            <div class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required>
+
+                I agree to the
+
+                <a
+                    href="#"
+                    onclick="showTerms()">
+
+                    Terms & Conditions
+
+                </a>
+
+                and
+
+                <a
+                    href="#"
+                    onclick="showPrivacy()">
+
+                    Privacy Policy
+
+                </a>.
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn">
+
+                Register
+
+            </button>
+
+
+        </form>
+
+
+        <div class="switch">
+
+            Already have an account?
+
+            <a
+                href="#"
+                onclick="showLogin()">
+
+                Login
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        © 2026 Digital Queue.
+        All Rights Reserved.
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
+
+function showRegister() {
+
+    document
+        .getElementById("loginForm")
+        .classList
+        .remove("active");
+
+
+    document
+        .getElementById("registerForm")
+        .classList
+        .add("active");
+
+}
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+function showLogin() {
+
+    document
+        .getElementById("registerForm")
+        .classList
+        .remove("active");
+
+
+    document
+        .getElementById("loginForm")
+        .classList
+        .add("active");
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(event) {
+
+    event.preventDefault();
+
+
+    const user =
+        document
+        .getElementById("loginUser")
+        .value.trim();
+
+
+    /*
+       For your project demo,
+       mark the user as logged in.
+    */
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+
+    /*
+       Check whether the user came
+       from an Apply button.
+    */
+
+    const requestedService =
+        localStorage.getItem(
+            "requestedService"
+        );
+
+
+    if (requestedService) {
+
+
+        /*
+           Remove it after reading.
+        */
+
+        localStorage.removeItem(
+            "requestedService"
+        );
+
+
+        /*
+           Send user directly to
+           the application form
+           with selected service.
+        */
+
+        window.location.href =
+            "application.html?service=" +
+            encodeURIComponent(
+                requestedService
+            );
+
+
+    } else {
+
+
+        /*
+           Normal login:
+           send to Home.
+        */
+
+        window.location.href =
+            "home.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+function register(event) {
+
+    event.preventDefault();
+
+
+    const password =
+        document
+        .getElementById("registerPassword")
+        .value;
+
+
+    const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+    if (password !== confirmPassword) {
+
+        alert(
+            "Passwords do not match!"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       For project demonstration,
+       registration also logs the user in.
+    */
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+
+    /*
+       Check requested service.
+    */
+
+    const requestedService =
+        localStorage.getItem(
+            "requestedService"
+        );
+
+
+    alert(
+        "Registration successful!"
+    );
+
+
+    if (requestedService) {
+
+
+        localStorage.removeItem(
+            "requestedService"
+        );
+
+
+        window.location.href =
+            "application.html?service=" +
+            encodeURIComponent(
+                requestedService
+            );
+
+
+    } else {
+
+        window.location.href =
+            "home.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+function forgotPassword() {
+
+    const emailOrMobile =
+        prompt(
+            "Enter your registered mobile number or email:"
+        );
+
+
+    if (emailOrMobile) {
+
+        alert(
+            "Password reset instructions will be sent to: "
+            + emailOrMobile
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TERMS
+===================================================== */
+
+function showTerms() {
+
+    alert(
+        "Terms & Conditions\n\n" +
+        "By using Digital Queue, you agree to " +
+        "follow the applicable terms and conditions."
+    );
+
+}
+
+
+/* =====================================================
+   PRIVACY
+===================================================== */
+
+function showPrivacy() {
+
+    alert(
+        "Privacy Policy\n\n" +
+        "Your personal information will be handled " +
+        "according to the applicable privacy policy."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
