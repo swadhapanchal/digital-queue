@@ -4,12 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Login / Registration - Digital Queue</title>
-
 
 <style>
 
@@ -20,21 +17,12 @@
     font-family: Arial, sans-serif;
 }
 
-
-/* ================= BODY ================= */
-
 body {
-
     min-height: 100vh;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     background: #F5F7FA;
-
     color: #14213D;
 }
 
@@ -42,9 +30,7 @@ body {
 /* ================= CONTAINER ================= */
 
 .container {
-
     width: 450px;
-
     max-width: 92%;
 
     background: white;
@@ -63,16 +49,12 @@ body {
 /* ================= LOGO ================= */
 
 .logo {
-
     text-align: center;
-
     margin-bottom: 25px;
 }
 
 .logo img {
-
     width: 70px;
-
     height: 75px;
 
     object-fit: contain;
@@ -81,29 +63,20 @@ body {
 }
 
 .logo h1 {
-
     color: #0D47A1;
-
     font-size: 28px;
-
     margin-bottom: 5px;
 }
 
 .logo p {
-
     color: #697586;
-
     font-size: 13px;
 }
 
 .gov-label {
-
     color: #14213D;
-
     font-size: 12px;
-
     margin-top: 5px;
-
     font-weight: bold;
 }
 
@@ -111,17 +84,14 @@ body {
 /* ================= FORM ================= */
 
 .form {
-
     display: none;
 }
 
 .form.active {
-
     display: block;
 }
 
 .form h2 {
-
     text-align: center;
 
     margin-bottom: 22px;
@@ -135,12 +105,10 @@ body {
 /* ================= INPUT ================= */
 
 .input-group {
-
     margin-bottom: 17px;
 }
 
 .input-group label {
-
     display: block;
 
     margin-bottom: 7px;
@@ -153,7 +121,6 @@ body {
 }
 
 .input-group input {
-
     width: 100%;
 
     height: 45px;
@@ -170,7 +137,6 @@ body {
 }
 
 .input-group input:focus {
-
     border-color: #0D47A1;
 
     box-shadow:
@@ -181,16 +147,13 @@ body {
 /* ================= FORGOT ================= */
 
 .forgot {
-
     text-align: right;
-
     margin-bottom: 18px;
 }
 
 .forgot a,
 .switch a,
 .terms a {
-
     color: #0D47A1;
 
     text-decoration: none;
@@ -201,7 +164,6 @@ body {
 .forgot a:hover,
 .switch a:hover,
 .terms a:hover {
-
     text-decoration: underline;
 }
 
@@ -209,7 +171,6 @@ body {
 /* ================= BUTTON ================= */
 
 .btn {
-
     width: 100%;
 
     height: 45px;
@@ -230,7 +191,6 @@ body {
 }
 
 .btn:hover {
-
     background: #1565C0;
 }
 
@@ -238,7 +198,6 @@ body {
 /* ================= SWITCH ================= */
 
 .switch {
-
     text-align: center;
 
     margin-top: 20px;
@@ -252,7 +211,6 @@ body {
 /* ================= TERMS ================= */
 
 .terms {
-
     font-size: 12px;
 
     color: #697586;
@@ -263,15 +221,50 @@ body {
 }
 
 .terms input {
-
     margin-right: 5px;
+}
+
+
+/* ================= MESSAGE ================= */
+
+.message {
+    display: none;
+
+    padding: 10px;
+
+    margin-bottom: 15px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+.message.error {
+    display: block;
+
+    background: #FDECEC;
+
+    color: #C62828;
+
+    border: 1px solid #F5B5B5;
+}
+
+.message.success {
+    display: block;
+
+    background: #EAF7EC;
+
+    color: #2E7D32;
+
+    border: 1px solid #B7DFBD;
 }
 
 
 /* ================= FOOTER ================= */
 
 .footer {
-
     text-align: center;
 
     margin-top: 25px;
@@ -292,12 +285,10 @@ body {
 @media (max-width: 480px) {
 
     .container {
-
         padding: 25px;
     }
 
     .logo h1 {
-
         font-size: 24px;
     }
 
@@ -327,7 +318,7 @@ body {
         </h1>
 
         <p>
-            e-Q Service Portal
+            Easy. Quick. Transparent.
         </p>
 
         <div class="gov-label">
@@ -337,16 +328,24 @@ body {
     </div>
 
 
-    <!-- ================= LOGIN FORM ================= -->
+
+    <!-- =================================================
+         LOGIN FORM
+    ================================================== -->
 
     <div
         class="form active"
         id="loginForm">
 
-
         <h2>
             Login
         </h2>
+
+
+        <div
+            id="loginMessage"
+            class="message">
+        </div>
 
 
         <form onsubmit="login(event)">
@@ -386,7 +385,7 @@ body {
 
                 <a
                     href="#"
-                    onclick="forgotPassword()">
+                    onclick="forgotPassword(event)">
 
                     Forgot Password?
 
@@ -413,7 +412,7 @@ body {
 
             <a
                 href="#"
-                onclick="showRegister()">
+                onclick="showRegister(event)">
 
                 Register
 
@@ -421,20 +420,27 @@ body {
 
         </div>
 
-
     </div>
 
 
-    <!-- ================= REGISTER FORM ================= -->
+
+    <!-- =================================================
+         REGISTER FORM
+    ================================================== -->
 
     <div
         class="form"
         id="registerForm">
 
-
         <h2>
             Create Account
         </h2>
+
+
+        <div
+            id="registerMessage"
+            class="message">
+        </div>
 
 
         <form onsubmit="register(event)">
@@ -481,6 +487,7 @@ body {
                     id="mobile"
                     placeholder="Enter mobile number"
                     maxlength="10"
+                    pattern="[0-9]{10}"
                     required>
 
             </div>
@@ -527,7 +534,7 @@ body {
 
                 <a
                     href="#"
-                    onclick="showTerms()">
+                    onclick="showTerms(event)">
 
                     Terms & Conditions
 
@@ -537,7 +544,7 @@ body {
 
                 <a
                     href="#"
-                    onclick="showPrivacy()">
+                    onclick="showPrivacy(event)">
 
                     Privacy Policy
 
@@ -564,7 +571,7 @@ body {
 
             <a
                 href="#"
-                onclick="showLogin()">
+                onclick="showLogin(event)">
 
                 Login
 
@@ -572,8 +579,8 @@ body {
 
         </div>
 
-
     </div>
+
 
 
     <!-- ================= FOOTER ================= -->
@@ -589,22 +596,47 @@ body {
 </div>
 
 
-<!-- ================= JAVASCRIPT ================= -->
 
 <script>
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+    elementId,
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            elementId
+        );
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
 
 
 /* =====================================================
    SHOW REGISTER
 ===================================================== */
 
-function showRegister() {
+function showRegister(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
 
     document
         .getElementById("loginForm")
         .classList
         .remove("active");
-
 
     document
         .getElementById("registerForm")
@@ -618,13 +650,16 @@ function showRegister() {
    SHOW LOGIN
 ===================================================== */
 
-function showLogin() {
+function showLogin(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
 
     document
         .getElementById("registerForm")
         .classList
         .remove("active");
-
 
     document
         .getElementById("loginForm")
@@ -646,12 +681,39 @@ function login(event) {
     const user =
         document
         .getElementById("loginUser")
-        .value.trim();
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    if (
+        user === "" ||
+        password === ""
+    ) {
+
+        showMessage(
+            "loginMessage",
+            "Please enter your login details.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
     /*
-       For your project demo,
-       mark the user as logged in.
+    -----------------------------------------------------
+    DEMO LOGIN
+
+    This is a frontend project, so we mark the user
+    as logged in using localStorage.
+    -----------------------------------------------------
     */
 
     localStorage.setItem(
@@ -661,8 +723,21 @@ function login(event) {
 
 
     /*
-       Check whether the user came
-       from an Apply button.
+    -----------------------------------------------------
+    SAVE USER NAME
+    -----------------------------------------------------
+    */
+
+    localStorage.setItem(
+        "userName",
+        user
+    );
+
+
+    /*
+    -----------------------------------------------------
+    CHECK WHETHER USER CAME FROM APPLY BUTTON
+    -----------------------------------------------------
     */
 
     const requestedService =
@@ -673,20 +748,9 @@ function login(event) {
 
     if (requestedService) {
 
-
         /*
-           Remove it after reading.
-        */
-
-        localStorage.removeItem(
-            "requestedService"
-        );
-
-
-        /*
-           Send user directly to
-           the application form
-           with selected service.
+        Keep requestedService until application.html
+        reads it.
         */
 
         window.location.href =
@@ -695,13 +759,12 @@ function login(event) {
                 requestedService
             );
 
+    }
 
-    } else {
-
+    else {
 
         /*
-           Normal login:
-           send to Home.
+        Normal login
         */
 
         window.location.href =
@@ -721,6 +784,27 @@ function register(event) {
     event.preventDefault();
 
 
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const mobile =
+        document
+        .getElementById("mobile")
+        .value
+        .trim();
+
+
     const password =
         document
         .getElementById("registerPassword")
@@ -733,10 +817,30 @@ function register(event) {
         .value;
 
 
-    if (password !== confirmPassword) {
+    if (
+        password !== confirmPassword
+    ) {
 
-        alert(
-            "Passwords do not match!"
+        showMessage(
+            "registerMessage",
+            "Passwords do not match!",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        mobile.length !== 10 ||
+        !/^[0-9]+$/.test(mobile)
+    ) {
+
+        showMessage(
+            "registerMessage",
+            "Please enter a valid 10 digit mobile number.",
+            "error"
         );
 
         return;
@@ -745,8 +849,31 @@ function register(event) {
 
 
     /*
-       For project demonstration,
-       registration also logs the user in.
+    -----------------------------------------------------
+    SAVE DEMO USER DATA
+    -----------------------------------------------------
+    */
+
+    localStorage.setItem(
+        "userName",
+        name
+    );
+
+    localStorage.setItem(
+        "userEmail",
+        email
+    );
+
+    localStorage.setItem(
+        "userMobile",
+        mobile
+    );
+
+
+    /*
+    -----------------------------------------------------
+    MARK USER AS LOGGED IN
+    -----------------------------------------------------
     */
 
     localStorage.setItem(
@@ -756,7 +883,9 @@ function register(event) {
 
 
     /*
-       Check requested service.
+    -----------------------------------------------------
+    CHECK REQUESTED SERVICE
+    -----------------------------------------------------
     */
 
     const requestedService =
@@ -765,18 +894,7 @@ function register(event) {
         );
 
 
-    alert(
-        "Registration successful!"
-    );
-
-
     if (requestedService) {
-
-
-        localStorage.removeItem(
-            "requestedService"
-        );
-
 
         window.location.href =
             "application.html?service=" +
@@ -784,8 +902,9 @@ function register(event) {
                 requestedService
             );
 
+    }
 
-    } else {
+    else {
 
         window.location.href =
             "home.html";
@@ -799,7 +918,12 @@ function register(event) {
    FORGOT PASSWORD
 ===================================================== */
 
-function forgotPassword() {
+function forgotPassword(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
 
     const emailOrMobile =
         prompt(
@@ -810,8 +934,8 @@ function forgotPassword() {
     if (emailOrMobile) {
 
         alert(
-            "Password reset instructions will be sent to: "
-            + emailOrMobile
+            "Password reset instructions will be sent to: " +
+            emailOrMobile
         );
 
     }
@@ -823,12 +947,17 @@ function forgotPassword() {
    TERMS
 ===================================================== */
 
-function showTerms() {
+function showTerms(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
 
     alert(
         "Terms & Conditions\n\n" +
-        "By using Digital Queue, you agree to " +
-        "follow the applicable terms and conditions."
+
+        "By using Digital Queue, you agree " +
+        "to follow the applicable terms and conditions."
     );
 
 }
@@ -838,10 +967,15 @@ function showTerms() {
    PRIVACY
 ===================================================== */
 
-function showPrivacy() {
+function showPrivacy(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
 
     alert(
         "Privacy Policy\n\n" +
+
         "Your personal information will be handled " +
         "according to the applicable privacy policy."
     );

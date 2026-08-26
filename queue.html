@@ -763,24 +763,6 @@ nav a.active {
     color: #667788;
 }
 
-
-.form-link-after-confirm {
-    display: none;
-    margin-top: 10px;
-    color: #0D47A1;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.form-link-after-confirm.show {
-    display: inline-block;
-}
-
-.form-link-after-confirm:hover {
-    text-decoration: underline;
-}
-
 .confirm-message {
     display: none;
 
@@ -1579,13 +1561,6 @@ footer {
 
             </div>
 
-            <a
-                href="form.html"
-                id="formLinkAfterConfirm"
-                class="form-link-after-confirm">
-                Continue to Application Form →
-            </a>
-
 
         </div>
 
@@ -2050,47 +2025,79 @@ window.addEventListener("load", function() {
 
 function confirmQueue() {
 
-    const button = document.getElementById("confirmButton");
-    const message = document.getElementById("confirmMessage");
-    const tokenElement = document.getElementById("tokenNumber");
 
-    // If already confirmed, continue directly to the application form.
-    if (localStorage.getItem("queueConfirmed") === "true") {
-        window.location.href = "form.html";
+    const alreadyConfirmed =
+        localStorage.getItem(
+            "queueConfirmed"
+        );
+
+
+    if (
+        alreadyConfirmed === "true"
+    ) {
+
+        window.location.href =
+            "form.html";
+
         return;
+
     }
 
-    const confirmed = confirm(
-        "Are you sure you want to confirm your queue?"
-    );
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to confirm your queue?"
+        );
+
 
     if (!confirmed) {
+
         return;
+
     }
 
-    // Save queue confirmation and token for form.html / later pages.
-    localStorage.setItem("queueConfirmed", "true");
+
     localStorage.setItem(
-        "confirmedQueueToken",
-        tokenElement ? tokenElement.textContent.trim() : "A-024"
+        "queueConfirmed",
+        "true"
     );
 
-    button.innerHTML = "✓ Queue Confirmed";
-    button.classList.add("confirmed");
 
-    if (message) {
-        message.style.display = "block";
-    }
+    const button =
+        document.getElementById(
+            "confirmButton"
+        );
 
-    const formLink = document.getElementById("formLinkAfterConfirm");
-    if (formLink) {
-        formLink.classList.add("show");
-    }
 
-    // Move to the application form after confirmation.
-    setTimeout(function() {
-        window.location.href = "form.html";
-    }, 500);
+    const message =
+        document.getElementById(
+            "confirmMessage"
+        );
+
+
+    button.textContent =
+        "✓ Queue Confirmed";
+
+
+    button.classList.add(
+        "confirmed"
+    );
+
+
+    message.style.display =
+        "block";
+
+
+    setTimeout(
+        function() {
+
+            window.location.href =
+                "form.html";
+
+        },
+        800
+    );
+
 }
 
 
@@ -2109,29 +2116,35 @@ window.addEventListener(
             );
 
 
-        if (confirmed === "true") {
+        if (
+            confirmed === "true"
+        ) {
+
 
             const button =
-                document.getElementById("confirmButton");
+                document.getElementById(
+                    "confirmButton"
+                );
+
 
             const message =
-                document.getElementById("confirmMessage");
+                document.getElementById(
+                    "confirmMessage"
+                );
 
-            if (button) {
-                button.innerHTML = "✓ Queue Confirmed";
-                button.classList.add("confirmed");
-            }
 
-            if (message) {
-                message.style.display = "block";
-            }
+            button.textContent =
+                "✓ Queue Confirmed";
 
-            const formLink =
-                document.getElementById("formLinkAfterConfirm");
 
-            if (formLink) {
-                formLink.classList.add("show");
-            }
+            button.classList.add(
+                "confirmed"
+            );
+
+
+            message.style.display =
+                "block";
+
         }
 
     }

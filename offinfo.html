@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Office Information - Digital Queue</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #F5F7FA;
+    color: #14213D;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    background: #0D47A1;
+    color: white;
+
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 35px;
+
+    gap: 25px;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.gov-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-width: 300px;
+}
+
+.emblem {
+    width: 65px;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+.gov-text h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.gov-text h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.gov-text p {
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 18px;
+
+    flex: 1;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: min(390px, 40vw);
+
+    height: 42px;
+
+    background: white;
+
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 13px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 14px;
+}
+
+.search-icon {
+    color: #14213D;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification-wrapper {
+    position: relative;
+}
+
+.notification-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #0D47A1;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.notification-btn:hover {
+    background: #EAF2FF;
+}
+
+.notification-badge {
+    position: absolute;
+
+    top: -3px;
+    right: -3px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #D32F2F;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel {
+    display: none;
+
+    position: absolute;
+
+    top: 52px;
+    right: 0;
+
+    width: 320px;
+
+    background: white;
+
+    color: #14213D;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.18);
+
+    z-index: 1000;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    padding: 15px;
+
+    font-weight: bold;
+
+    border-bottom:
+        1px solid #E5E7EB;
+}
+
+.notification-item {
+    padding: 13px 15px;
+
+    border-bottom:
+        1px solid #F0F0F0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+.language-select {
+    height: 42px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 0 10px;
+
+    background: white;
+
+    color: #14213D;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile {
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav {
+    background: white;
+
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 25px;
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.08);
+
+    overflow-x: auto;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #14213D;
+
+    padding: 19px 22px;
+
+    height: 55px;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #0D47A1;
+}
+
+nav a.active {
+    color: #0D47A1;
+
+    font-weight: bold;
+
+    border-bottom:
+        3px solid #0D47A1;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.container {
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: 30px auto;
+
+    padding: 0 30px;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.title {
+    background: #0D47A1;
+
+    color: white;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.07);
+}
+
+
+/* =====================================================
+   OFFICE PHOTO
+===================================================== */
+
+.office-photo {
+    width: 100%;
+
+    height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+    margin-bottom: 28px;
+}
+
+
+/* =====================================================
+   OFFICE INFORMATION GRID
+===================================================== */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.info {
+    background: #F8FAFC;
+
+    border: 1px solid #E1E6ED;
+
+    border-radius: 8px;
+
+    padding: 18px;
+}
+
+.info h3 {
+    font-size: 15px;
+
+    margin-bottom: 8px;
+
+    color: #0D47A1;
+}
+
+.info p {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #14213D;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.location {
+    background: #EAF2FF;
+
+    padding: 20px;
+
+    border-radius: 9px;
+
+    margin-top: 10px;
+
+    border-left:
+        5px solid #0D47A1;
+}
+
+.location h3 {
+    margin-bottom: 8px;
+
+    color: #0D47A1;
+}
+
+.location p {
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   QUEUE
+===================================================== */
+
+.queue {
+    background: white;
+
+    border: 1px solid #E0E5EC;
+
+    padding: 22px;
+
+    border-radius: 9px;
+
+    margin-top: 22px;
+}
+
+.queue h3 {
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+.queue-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #EEEEEE;
+
+    font-size: 14px;
+}
+
+.queue-row:last-child {
+    border-bottom: none;
+}
+
+.processing {
+    color: #1565C0;
+
+    font-weight: bold;
+}
+
+.approved {
+    color: #2E7D32;
+
+    font-weight: bold;
+}
+
+.rejected {
+    color: #C62828;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.btn {
+    flex: 1;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #0D47A1;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #1565C0;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    background: #0D47A1;
+
+    color: white;
+
+    margin-top: 45px;
+
+    padding: 35px 40px 20px;
+}
+
+.footer-content {
+    max-width: 1500px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr repeat(4, 1fr);
+
+    gap: 30px;
+}
+
+.footer-column h3 {
+    margin-bottom: 13px;
+
+    font-size: 16px;
+}
+
+.footer-column p,
+.footer-column a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    display: block;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+.footer-bottom {
+    max-width: 1500px;
+
+    margin: 25px auto 0;
+
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:1100px) {
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    .header-right {
+        width: 100%;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .footer-content {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px) {
+
+    header {
+        flex-direction: column;
+
+        padding: 18px;
+
+        align-items: stretch;
+    }
+
+    .gov-logo {
+        justify-content: center;
+    }
+
+    .header-right {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    nav {
+        padding-left: 0;
+    }
+
+    nav a {
+        padding: 19px 14px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .office-photo {
+        height: 240px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .notification-panel {
+        position: fixed;
+
+        top: 100px;
+
+        left: 15px;
+        right: 15px;
+
+        width: auto;
+    }
+}
+
+
+
+/* =====================================================
+   GOVERNMENT OFFICE PHOTO SECTION
+===================================================== */
+
+.office-photo-section {
+    background: #EAF2FF;
+    padding: 20px;
+    border-radius: 9px;
+    margin-top: 10px;
+    border-left: 5px solid #0D47A1;
+}
+
+.office-photo-section h3 {
+    margin-bottom: 14px;
+    color: #0D47A1;
+    font-size: 20px;
+}
+
+.office-photo-section .office-photo {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0;
+    display: block;
+}
+
+.office-photo-caption {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #14213D;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+
+    <!-- LOGO -->
+
+    <div class="gov-logo">
+
+        <img
+            class="emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Ashoka Emblem">
+
+        <div class="gov-text">
+
+            <h2 data-key="government">
+                Government of India
+            </h2>
+
+            <h3>
+                Digital Queue
+            </h3>
+
+            <p data-key="tagline">
+                Easy. Quick. Transparent.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEADER RIGHT -->
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search services, documents, offices..."
+                data-placeholder="searchPlaceholder">
+
+            <span
+                class="search-icon"
+                onclick="performSearch()">
+
+                🔍
+
+            </span>
+
+        </div>
+
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification-wrapper">
+
+            <button
+                class="notification-btn"
+                onclick="toggleNotifications()">
+
+                🔔
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </button>
+
+
+            <div
+                class="notification-panel"
+                id="notificationPanel">
+
+                <div
+                    class="notification-header"
+                    data-key="notifications">
+
+                    Notifications
+
+                </div>
+
+                <div class="notification-item">
+
+                    🔔
+
+                    <span data-key="notification1">
+                        Your application status has been updated.
+                    </span>
+
+                </div>
+
+                <div class="notification-item">
+
+                    📍
+
+                    <span data-key="notification2">
+                        Queue confirmation is required before visiting the office.
+                    </span>
+
+                </div>
+
+                <div class="notification-item">
+
+                    ℹ️
+
+                    <span data-key="notification3">
+                        Check available government services.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LANGUAGE -->
+
+        <select
+            class="language-select"
+            id="languageSelect"
+            onchange="changeLanguage(this.value)">
+
+            <option value="en">
+                English
+            </option>
+
+            <option value="hi">
+                हिन्दी
+            </option>
+
+            <option value="gu">
+                ગુજરાતી
+            </option>
+
+        </select>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="profile"
+            onclick="openProfile()">
+
+            👤
+
+            <span data-key="loginProfile">
+                Login / Profile
+            </span>
+
+            ▾
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+
+    <a href="home.html">
+
+        ⌂ &nbsp;
+
+        <span data-key="home">
+            Home
+        </span>
+
+    </a>
+
+
+    <a href="service.html">
+
+        ▣ &nbsp;
+
+        <span data-key="services">
+            Services
+        </span>
+
+    </a>
+
+
+    <a href="myapplication.html">
+
+        ▤ &nbsp;
+
+        <span data-key="applications">
+            My Applications
+        </span>
+
+    </a>
+
+
+    <a href="queue.html">
+
+        ☷ &nbsp;
+
+        <span data-key="queue">
+            Queue Status
+        </span>
+
+    </a>
+
+
+    <a
+        href="offinfo.html"
+        class="active">
+
+        🏛 &nbsp;
+
+        <span data-key="offices">
+            Offices
+        </span>
+
+    </a>
+
+
+    <a href="#">
+
+        ? &nbsp;
+
+        <span data-key="help">
+            Help
+        </span>
+
+    </a>
+
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="container">
+
+
+    <div class="title"
+         data-key="officeInformation">
+
+        Office Information
+
+    </div>
+
+
+    <div class="card">
+
+        <!-- INFORMATION -->
+
+        <div class="info-grid">
+
+
+            <div class="info">
+
+                <h3 data-key="officeName">
+                    Office Name
+                </h3>
+
+                <p>
+                    District Seva Sadan / Bahumali Bhavan
+                </p>
+
+            </div>
+
+
+            <div class="info">
+
+                <h3 data-key="officeAddress">
+                    Office Address
+                </h3>
+
+                <p>
+                    Bahumali Bhavan Campus,<br>
+                    Nanpura, Surat, Gujarat - 395001
+                </p>
+
+            </div>
+
+
+            <div class="info">
+
+                <h3 data-key="workingHours">
+                    Working Hours
+                </h3>
+
+                <p>
+                    Monday - Friday : 10:30 AM - 6:00 PM
+                </p>
+
+            </div>
+
+
+            <div class="info">
+
+                <h3 data-key="contactNumber">
+                    Contact Number
+                </h3>
+
+                <p>
+                    0261-2460698
+                </p>
+
+            </div>
+
+
+            <div class="info">
+
+                <h3 data-key="email">
+                    Email
+                </h3>
+
+                <p>
+                    Government Office, Surat
+                </p>
+
+            </div>
+
+
+            <div class="info">
+
+                <h3 data-key="holidays">
+                    Holidays
+                </h3>
+
+                <p>
+                    Saturday, Sunday & Government Holidays
+                </p>
+
+            </div>
+
+
+        </div>
+
+<!-- QUEUE -->
+
+        <div class="queue">
+
+            <h3 data-key="queueInformation">
+
+                Current Queue / Waiting Information
+
+            </h3>
+
+
+            <div class="queue-row">
+
+                <span data-key="currentToken">
+                    Current Token
+                </span>
+
+                <strong>
+                    D-39
+                </strong>
+
+            </div>
+
+
+            <div class="queue-row">
+
+                <span data-key="tokensBefore">
+                    Tokens Before You
+                </span>
+
+                <strong>
+                    6
+                </strong>
+
+            </div>
+
+
+            <div class="queue-row">
+
+                <span data-key="waitingTime">
+                    Estimated Waiting Time
+                </span>
+
+                <strong>
+                    15 mins
+                </strong>
+
+            </div>
+
+
+            <div class="queue-row">
+
+                <span data-key="queueStatus">
+                    Queue Status
+                </span>
+
+                <span class="processing"
+                      data-key="processing">
+
+                    Processing
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+
+            <a
+                class="btn"
+                href="https://www.google.com/maps/search/?api=1&query=Bahumali+Bhavan+Nanpura+Surat"
+                target="_blank">
+
+                📍
+
+                <span data-key="viewLocation">
+                    View Location
+                </span>
+
+            </a>
+
+
+            <button
+                class="btn"
+                onclick="history.back()">
+
+                ←
+
+                <span data-key="back">
+                    Back
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                Government of India
+            </div>
+
+            <p>
+                Digital Queue
+            </p>
+
+            <p>
+                © 2026 All Rights Reserved
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3 data-key="importantLinks">
+                Important Links
+            </h3>
+
+            <a href="#"
+               data-key="about">
+                About Us
+            </a>
+
+            <a href="#"
+               data-key="terms">
+                Terms & Conditions
+            </a>
+
+            <a href="#"
+               data-key="privacy">
+                Privacy Policy
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3 data-key="support">
+                Support
+            </h3>
+
+            <a href="#"
+               data-key="helpCenter">
+                Help Center
+            </a>
+
+            <a href="#"
+               data-key="faqs">
+                FAQs
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3 data-key="follow">
+                Follow Us
+            </h3>
+
+            <p>
+                Facebook
+            </p>
+
+            <p>
+                Twitter
+            </p>
+
+            <p>
+                YouTube
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3 data-key="download">
+                Download Our App
+            </h3>
+
+            <p>
+                Google Play
+            </p>
+
+            <p>
+                App Store
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        Government of India e-Q Service Portal |
+        Easy. Quick. Transparent.
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   LANGUAGE DATA
+===================================================== */
+
+const translations = {
+
+    en: {
+
+        government: "Government of India",
+        tagline: "Easy. Quick. Transparent.",
+
+        searchPlaceholder:
+            "Search services, documents, offices...",
+
+        notifications: "Notifications",
+
+        notification1:
+            "Your application status has been updated.",
+
+        notification2:
+            "Queue confirmation is required before visiting the office.",
+
+        notification3:
+            "Check available government services.",
+
+        loginProfile:
+            "Login / Profile",
+
+        home: "Home",
+        services: "Services",
+        applications: "My Applications",
+        queue: "Queue Status",
+        offices: "Offices",
+        help: "Help",
+
+        officeInformation:
+            "Office Information",
+
+        officeName:
+            "Office Name",
+
+        officeAddress:
+            "Office Address",
+
+        workingHours:
+            "Working Hours",
+
+        contactNumber:
+            "Contact Number",
+
+        email:
+            "Email",
+
+        holidays:
+            "Holidays",
+
+        location:
+            "Google Map / Location",
+
+        officePhoto:
+            "Government Office",
+
+        queueInformation:
+            "Current Queue / Waiting Information",
+
+        currentToken:
+            "Current Token",
+
+        tokensBefore:
+            "Tokens Before You",
+
+        waitingTime:
+            "Estimated Waiting Time",
+
+        queueStatus:
+            "Queue Status",
+
+        processing:
+            "Processing",
+
+        viewLocation:
+            "View Location",
+
+        back:
+            "Back",
+
+        importantLinks:
+            "Important Links",
+
+        about:
+            "About Us",
+
+        terms:
+            "Terms & Conditions",
+
+        privacy:
+            "Privacy Policy",
+
+        support:
+            "Support",
+
+        helpCenter:
+            "Help Center",
+
+        faqs:
+            "FAQs",
+
+        follow:
+            "Follow Us",
+
+        download:
+            "Download Our App"
+
+    },
+
+
+    hi: {
+
+        government:
+            "भारत सरकार",
+
+        tagline:
+            "आसान। त्वरित। पारदर्शी।",
+
+        searchPlaceholder:
+            "सेवाएँ, दस्तावेज़, कार्यालय खोजें...",
+
+        notifications:
+            "सूचनाएँ",
+
+        notification1:
+            "आपके आवेदन की स्थिति अपडेट की गई है।",
+
+        notification2:
+            "कार्यालय जाने से पहले कतार की पुष्टि आवश्यक है।",
+
+        notification3:
+            "उपलब्ध सरकारी सेवाएँ देखें।",
+
+        loginProfile:
+            "लॉगिन / प्रोफ़ाइल",
+
+        home:
+            "होम",
+
+        services:
+            "सेवाएँ",
+
+        applications:
+            "मेरे आवेदन",
+
+        queue:
+            "कतार स्थिति",
+
+        offices:
+            "कार्यालय",
+
+        help:
+            "सहायता",
+
+        officeInformation:
+            "कार्यालय की जानकारी",
+
+        officeName:
+            "कार्यालय का नाम",
+
+        officeAddress:
+            "कार्यालय का पता",
+
+        workingHours:
+            "कार्य समय",
+
+        contactNumber:
+            "संपर्क नंबर",
+
+        email:
+            "ईमेल",
+
+        holidays:
+            "छुट्टियाँ",
+
+        location:
+            "गूगल मैप / स्थान",
+
+        officePhoto:
+            "सरकारी कार्यालय",
+
+        queueInformation:
+            "वर्तमान कतार / प्रतीक्षा जानकारी",
+
+        currentToken:
+            "वर्तमान टोकन",
+
+        tokensBefore:
+            "आपसे पहले टोकन",
+
+        waitingTime:
+            "अनुमानित प्रतीक्षा समय",
+
+        queueStatus:
+            "कतार स्थिति",
+
+        processing:
+            "प्रक्रिया में",
+
+        viewLocation:
+            "स्थान देखें",
+
+        back:
+            "वापस",
+
+        importantLinks:
+            "महत्वपूर्ण लिंक",
+
+        about:
+            "हमारे बारे में",
+
+        terms:
+            "नियम एवं शर्तें",
+
+        privacy:
+            "गोपनीयता नीति",
+
+        support:
+            "सहायता",
+
+        helpCenter:
+            "सहायता केंद्र",
+
+        faqs:
+            "सामान्य प्रश्न",
+
+        follow:
+            "हमें फॉलो करें",
+
+        download:
+            "हमारा ऐप डाउनलोड करें"
+
+    },
+
+
+    gu: {
+
+        government:
+            "ભારત સરકાર",
+
+        tagline:
+            "સરળ. ઝડપી. પારદર્શક.",
+
+        searchPlaceholder:
+            "સેવાઓ, દસ્તાવેજો, કચેરીઓ શોધો...",
+
+        notifications:
+            "સૂચનાઓ",
+
+        notification1:
+            "તમારી અરજીની સ્થિતિ અપડેટ કરવામાં આવી છે.",
+
+        notification2:
+            "કચેરીની મુલાકાત પહેલાં કતારની પુષ્ટિ જરૂરી છે.",
+
+        notification3:
+            "ઉપલબ્ધ સરકારી સેવાઓ તપાસો.",
+
+        loginProfile:
+            "લૉગિન / પ્રોફાઇલ",
+
+        home:
+            "હોમ",
+
+        services:
+            "સેવાઓ",
+
+        applications:
+            "મારી અરજીઓ",
+
+        queue:
+            "કતાર સ્થિતિ",
+
+        offices:
+            "કચેરીઓ",
+
+        help:
+            "મદદ",
+
+        officeInformation:
+            "કચેરીની માહિતી",
+
+        officeName:
+            "કચેરીનું નામ",
+
+        officeAddress:
+            "કચેરીનું સરનામું",
+
+        workingHours:
+            "કામકાજનો સમય",
+
+        contactNumber:
+            "સંપર્ક નંબર",
+
+        email:
+            "ઇમેઇલ",
+
+        holidays:
+            "રજાઓ",
+
+        location:
+            "ગૂગલ મેપ / સ્થાન",
+
+        officePhoto:
+            "સરકારી કચેરી",
+
+        queueInformation:
+            "વર્તમાન કતાર / રાહ જોવાની માહિતી",
+
+        currentToken:
+            "વર્તમાન ટોકન",
+
+        tokensBefore:
+            "તમારા પહેલાં ટોકન",
+
+        waitingTime:
+            "અંદાજિત રાહ સમય",
+
+        queueStatus:
+            "કતાર સ્થિતિ",
+
+        processing:
+            "પ્રક્રિયામાં",
+
+        viewLocation:
+            "સ્થાન જુઓ",
+
+        back:
+            "પાછા",
+
+        importantLinks:
+            "મહત્વપૂર્ણ લિંક્સ",
+
+        about:
+            "અમારા વિશે",
+
+        terms:
+            "નિયમો અને શરતો",
+
+        privacy:
+            "ગોપનીયતા નીતિ",
+
+        support:
+            "સહાય",
+
+        helpCenter:
+            "સહાય કેન્દ્ર",
+
+        faqs:
+            "વારંવાર પૂછાતા પ્રશ્નો",
+
+        follow:
+            "અમને ફોલો કરો",
+
+        download:
+            "અમારી એપ ડાઉનલોડ કરો"
+
+    }
+
+};
+
+
+/* =====================================================
+   LANGUAGE FUNCTION
+===================================================== */
+
+function changeLanguage(language) {
+
+    localStorage.setItem(
+        "selectedLanguage",
+        language
+    );
+
+    applyLanguage(language);
+
+}
+
+
+function applyLanguage(language) {
+
+    const data =
+        translations[language];
+
+    if (!data) return;
+
+
+    document
+        .querySelectorAll("[data-key]")
+        .forEach(function(element) {
+
+            const key =
+                element.getAttribute(
+                    "data-key"
+                );
+
+            if (data[key] !== undefined) {
+
+                element.textContent =
+                    data[key];
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll("[data-placeholder]")
+        .forEach(function(element) {
+
+            const key =
+                element.getAttribute(
+                    "data-placeholder"
+                );
+
+            if (data[key] !== undefined) {
+
+                element.placeholder =
+                    data[key];
+
+            }
+
+        });
+
+}
+
+
+/* =====================================================
+   LOAD SAVED LANGUAGE
+===================================================== */
+
+const savedLanguage =
+    localStorage.getItem(
+        "selectedLanguage"
+    ) || "en";
+
+
+document.getElementById(
+    "languageSelect"
+).value = savedLanguage;
+
+
+applyLanguage(savedLanguage);
+
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
+function toggleNotifications() {
+
+    document
+        .getElementById(
+            "notificationPanel"
+        )
+        .classList.toggle("show");
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const wrapper =
+            document.querySelector(
+                ".notification-wrapper"
+            );
+
+        const panel =
+            document.getElementById(
+                "notificationPanel"
+            );
+
+        if (
+            !wrapper.contains(
+                event.target
+            )
+        ) {
+
+            panel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function performSearch() {
+
+    const value =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .trim();
+
+    if (value === "") {
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "service.html?search=" +
+        encodeURIComponent(
+            value
+        );
+
+}
+
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            performSearch();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function openProfile() {
+
+    const loggedIn =
+        localStorage.getItem(
+            "isLoggedIn"
+        );
+
+
+    if (
+        loggedIn === "true"
+    ) {
+
+        window.location.href =
+            "profile.html";
+
+    } else {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

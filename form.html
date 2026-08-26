@@ -1,0 +1,2959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title><span data-i18n="pageTitle">QR & <span data-i18n="locationVerification">Location Verification</span></span> - Digital Queue</title>
+
+<!-- QR SCANNER -->
+<script
+    src="https://unpkg.com/html5-qrcode"
+    type="text/javascript">
+
+document.addEventListener("click", function(event) {
+
+    const languageWrapper = document.querySelector(".language-wrapper");
+
+    if (languageWrapper && !languageWrapper.contains(event.target)) {
+        const menu = document.getElementById("languageMenu");
+        if (menu) {
+            menu.classList.remove("show");
+        }
+    }
+});
+
+window.addEventListener("load", function() {
+    const savedLanguage =
+        localStorage.getItem("selectedLanguage") || "en";
+
+    setLanguage(savedLanguage);
+});
+
+</script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #F5F7FA;
+    color: #14213D;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    background: #0D47A1;
+    color: white;
+
+    min-height: 100px;
+
+    padding: 12px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.gov-logo {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    min-width: 300px;
+}
+
+.emblem {
+    width: 65px;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+.gov-text h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.gov-text h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.gov-text p {
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    flex: 1;
+
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box {
+    width: 390px;
+
+    height: 42px;
+
+    background: white;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 13px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.search-icon {
+    color: #14213D;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification-wrapper {
+    position: relative;
+}
+
+.notification-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #0D47A1;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+
+    top: -3px;
+    right: -3px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #D32F2F;
+
+    color: white;
+
+    font-size: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel {
+    display: none;
+
+    position: absolute;
+
+    top: 52px;
+    right: 0;
+
+    width: 300px;
+
+    background: white;
+
+    color: #14213D;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.18);
+
+    z-index: 1000;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    padding: 15px;
+
+    font-weight: bold;
+
+    border-bottom:
+        1px solid #E5E7EB;
+}
+
+.notification-item {
+    padding: 13px 15px;
+
+    border-bottom:
+        1px solid #F0F0F0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile {
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav {
+    background: white;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left: 30px;
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.08);
+
+    overflow-x: auto;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #14213D;
+
+    padding: 19px 22px;
+
+    height: 55px;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #0D47A1;
+}
+
+nav a.active {
+    color: #0D47A1;
+
+    font-weight: bold;
+
+    border-bottom:
+        3px solid #0D47A1;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.container {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 35px auto;
+
+    padding: 0 25px;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title {
+    background: #0D47A1;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.page-description {
+    text-align: center;
+
+    color: #64748B;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.verification-card {
+    background: white;
+
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: auto;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.08);
+
+    border: 1px solid #E1E6ED;
+}
+
+
+/* =====================================================
+   STEP
+===================================================== */
+
+.step {
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.step-number {
+    width: 38px;
+    height: 38px;
+
+    background: #0D47A1;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    margin-right: 12px;
+}
+
+.step-title {
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: #14213D;
+}
+
+
+/* =====================================================
+   LOCATION BOX
+===================================================== */
+
+#locationPermissionBox {
+    text-align: center;
+
+    padding: 30px 20px;
+
+    background: #F5F7FA;
+
+    border-radius: 10px;
+
+    border: 1px solid #E1E6ED;
+}
+
+.location-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    background: #E8F1FF;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+#locationPermissionBox h2 {
+    margin-bottom: 12px;
+
+    color: #0D47A1;
+
+    font-size: 21px;
+}
+
+#locationPermissionBox p {
+    color: #64748B;
+
+    line-height: 1.6;
+
+    margin-bottom: 10px;
+}
+
+.small-text {
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.button {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #0D47A1;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #1565C0;
+}
+
+.button:disabled {
+    background: #9CA3AF;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   QR SECTION
+===================================================== */
+
+#qrSection {
+    display: none;
+}
+
+#reader {
+    width: 100%;
+
+    max-width: 430px;
+
+    margin: 20px auto;
+
+    border: 2px solid #0D47A1;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.scan-message {
+    text-align: center;
+
+    color: #64748B;
+
+    margin: 15px 0;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   LOCATION RESULT
+===================================================== */
+
+.location-result {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 9px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E1E6ED;
+}
+
+.location-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 10px 0;
+
+    border-bottom:
+        1px solid #E5E7EB;
+
+    font-size: 14px;
+}
+
+.location-row:last-child {
+    border-bottom: none;
+}
+
+.location-label {
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   QR RESULT
+===================================================== */
+
+.result-box {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #F5F7FA;
+
+    border-radius: 10px;
+}
+
+.result-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid #E5E7EB;
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-label {
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+.success {
+    display: block;
+
+    background: #E8F5E9;
+
+    color: #2E7D32;
+
+    border: 1px solid #A5D6A7;
+}
+
+.error {
+    display: block;
+
+    background: #FFEBEE;
+
+    color: #C62828;
+
+    border: 1px solid #EF9A9A;
+}
+
+.processing {
+    display: block;
+
+    background: #E8F1FF;
+
+    color: #0D47A1;
+
+    border: 1px solid #90CAF9;
+}
+
+
+/* =====================================================
+   CONFIRM BUTTON
+===================================================== */
+
+.confirm-section {
+    display: none;
+
+    margin-top: 25px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid #E1E6ED;
+
+    text-align: center;
+}
+
+.confirm-button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #2E7D32;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background: #256628;
+}
+
+.confirm-note {
+    margin-top: 9px;
+
+    color: #64748B;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    background: #0D47A1;
+
+    color: white;
+
+    margin-top: 50px;
+
+    padding: 35px 40px 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr repeat(4, 1fr);
+
+    gap: 30px;
+}
+
+.footer-column h3 {
+    margin-bottom: 13px;
+
+    font-size: 16px;
+}
+
+.footer-column p,
+.footer-column a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    display: block;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-logo {
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+
+    margin: 25px auto 0;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    header {
+        flex-wrap: wrap;
+
+        padding: 18px 20px;
+    }
+
+    .header-right {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        width: 100%;
+
+        max-width: 500px;
+    }
+
+    .footer-content {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .gov-logo {
+        justify-content: center;
+    }
+
+    nav {
+        padding-left: 0;
+    }
+
+    nav a {
+        padding: 19px 14px;
+    }
+
+    .container {
+        padding: 0 15px;
+
+        margin-top: 25px;
+    }
+
+    .verification-card {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 23px;
+    }
+
+    .notification-panel {
+        position: fixed;
+
+        top: 100px;
+
+        left: 15px;
+        right: 15px;
+
+        width: auto;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   LANGUAGE SELECTOR
+===================================================== */
+.language-wrapper {
+    position: relative;
+}
+
+.language-btn {
+    height: 42px;
+    min-width: 112px;
+    padding: 0 13px;
+    border: none;
+    border-radius: 6px;
+    background: white;
+    color: #14213D;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.language-btn:hover {
+    background: #F5F7FA;
+}
+
+.language-arrow {
+    color: #0D47A1;
+    font-size: 11px;
+}
+
+.language-menu {
+    display: none;
+    position: absolute;
+    top: 49px;
+    right: 0;
+    width: 155px;
+    background: white;
+    border-radius: 7px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.20);
+    overflow: hidden;
+    z-index: 3000;
+}
+
+.language-menu.show {
+    display: block;
+}
+
+.language-option {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    background: white;
+    color: #14213D;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.language-option:hover {
+    background: #E8F1FF;
+    color: #0D47A1;
+}
+
+.emblem-wrap {
+    width: 65px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emblem-fallback {
+    width: 65px;
+    height: 70px;
+    object-fit: contain;
+}
+
+
+@media (max-width: 600px) {
+    .language-btn {
+        min-width: 110px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+
+    <div class="gov-logo">
+
+        <!-- Use your existing Ashoka Stambh image -->
+        <div class="emblem-wrap">
+                    <img
+            class="emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="State Emblem of India">
+        </div>
+
+        <div class="gov-text">
+
+            <h2 data-i18n="government">Government of India</h2>
+
+            <h3 data-i18n="digitalQueue">Digital Queue</h3>
+
+            <p data-i18n="tagline">Easy. Quick. Transparent.</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input type="text" id="searchInput" data-placeholder="search" placeholder="Search services, documents, offices...">
+
+            <span
+                class="search-icon"
+                onclick="performSearch()">
+
+                🔍
+
+            </span>
+
+        </div>
+
+
+        <!-- LANGUAGE -->
+
+        <div class="language-wrapper">
+
+            <button
+                class="language-btn"
+                id="languageButton"
+                type="button"
+                onclick="toggleLanguageMenu(event)">
+
+                <span id="currentLanguage">English</span>
+                <span class="language-arrow">▼</span>
+
+            </button>
+
+            <div
+                class="language-menu"
+                id="languageMenu">
+
+                <button
+                    class="language-option"
+                    type="button"
+                    onclick="setLanguage('en')">
+                    English
+                </button>
+
+                <button
+                    class="language-option"
+                    type="button"
+                    onclick="setLanguage('hi')">
+                    हिंदी
+                </button>
+
+                <button
+                    class="language-option"
+                    type="button"
+                    onclick="setLanguage('gu')">
+                    ગુજરાતી
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification-wrapper">
+
+            <button
+                class="notification-btn"
+                onclick="toggleNotifications()">
+
+                🔔
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </button>
+
+
+            <div
+                class="notification-panel"
+                id="notificationPanel">
+
+                <div class="notification-header">
+                    <span data-i18n="notifications">Notifications</span>
+                </div>
+
+                <div class="notification-item">
+                    <span data-i18n="notification1"><span data-i18n="notification1">📍 Location verification is required.</span></span>
+                </div>
+
+                <div class="notification-item">
+                    <span data-i18n="notification2"><span data-i18n="notification2">📷 Scan the official office QR code.</span></span>
+                </div>
+
+                <div class="notification-item">
+                    <span data-i18n="notification3"><span data-i18n="notification3">ℹ️ Stay within the allowed 100 metre area.</span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="profile"
+            onclick="openProfile()">
+
+            👤 <span data-i18n="loginProfile">Login / Profile ▾</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+    <a href="home.html">
+        ⌂ &nbsp;
+        <span data-i18n="home">Home</span>
+    </a>
+
+    <a href="service.html">
+        ▣ &nbsp;
+        <span data-i18n="services">Services</span>
+    </a>
+
+    <a href="myapplication.html">
+        ▤ &nbsp;
+        <span data-i18n="myApplications">My Applications</span>
+    </a>
+
+    <a href="queue.html">
+        ☷ &nbsp;
+        <span data-i18n="queueStatus">Queue Status</span>
+    </a>
+
+    <a href="offinfo.html">
+        🏛 &nbsp;
+        <span data-i18n="offices">Offices</span>
+    </a>
+
+    <a href="#">
+        ? &nbsp;
+        <span data-i18n="help">Help</span>
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        QR & Location Verification
+
+    </div>
+
+
+    <p class="page-description">
+
+        <span data-i18n="pageDescription1">Allow location access first.</span>
+        <span data-i18n="pageDescription2">Your location must be within</span>
+        <span data-i18n="pageDescription3"><span data-i18n="hundredMetres">100 metres</span> of the selected Ved Road service area.</span>
+        <span data-i18n="pageDescription4">Then scan the official office QR code.</span>
+
+    </p>
+
+
+
+    <div class="verification-card">
+
+
+        <!-- =================================================
+             STEP 1
+        ================================================== -->
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <div class="step-title">
+                <span data-i18n="allowLocationAccess"><span data-i18n="allowLocation">Allow Location</span> Access</span>
+            </div>
+
+        </div>
+
+
+        <div id="locationPermissionBox">
+
+
+            <div class="location-icon">
+                📍
+            </div>
+
+
+            <h2>
+                Location Verification
+            </h2>
+
+
+            <p>
+
+                <span data-i18n="locationRequired1">Your location is required to verify</span>
+                <span data-i18n="locationRequired2">that you are at the selected</span>
+                <span data-i18n="locationRequired3">government service area.</span>
+
+            </p>
+
+
+            <p class="small-text">
+
+                <span data-i18n="within">You must be within</span>
+                <strong>100 metres</strong>
+                <span data-i18n="verificationPoint">of the Ved Road verification point</span>
+                <span data-i18n="toContinue">to continue.</span>
+
+            </p>
+
+
+            <button
+                class="button"
+                id="allowLocationButton"
+                onclick="requestLocationPermission()">
+
+                Allow Location
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             QR SECTION
+        ================================================== -->
+
+        <div id="qrSection">
+
+
+            <!-- STEP 2 -->
+
+            <div
+                class="step"
+                style="margin-top:30px;">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <div class="step-title">
+                    <span data-i18n="scanOfficeQR">Scan <span data-i18n="office">Office</span> QR Code</span>
+                </div>
+
+            </div>
+
+
+            <div id="reader"></div>
+
+
+            <p
+                class="scan-message"
+                id="scanMessage">
+
+                <span data-i18n="positionQR1">Position the official office QR code</span>
+                <span data-i18n="positionQR2">inside the scanner.</span>
+
+            </p>
+
+
+
+            <!-- QR RESULT -->
+
+            <div
+                class="result-box"
+                id="resultBox">
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        Office
+                    </span>
+
+                    <span id="officeName">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        <span data-i18n="officeId">Office ID</span>
+                    </span>
+
+                    <span id="officeId">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span class="result-label">
+                        <span data-i18n="qrStatus">QR Status</span>
+                    </span>
+
+                    <span
+                        id="qrStatus"
+                        style="color:#2E7D32;">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOCATION RESULT
+            ================================================== -->
+
+            <div
+                class="location-result"
+                id="locationResult">
+
+
+                <div class="location-row">
+
+                    <span class="location-label">
+                        <span data-i18n="distance">Distance from verification point</span>
+                    </span>
+
+                    <span id="distanceValue">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="location-row">
+
+                    <span class="location-label">
+                        <span data-i18n="allowedDistance">Allowed distance</span>
+                    </span>
+
+                    <span>
+                        100 metres
+                    </span>
+
+                </div>
+
+
+                <div class="location-row">
+
+                    <span class="location-label">
+                        <span data-i18n="locationStatus">Location status</span>
+                    </span>
+
+                    <span id="locationStatus">
+                        -
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STEP 3
+            ================================================== -->
+
+            <div
+                class="step"
+                style="margin-top:30px;">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <div class="step-title">
+                    <span data-i18n="verifyOfficeLocation">Verify Office Location</span>
+                </div>
+
+            </div>
+
+
+            <button
+                class="button"
+                id="locationButton"
+                onclick="verifyOfficeLocation()"
+                disabled>
+
+                <span data-i18n="verifyLocation">Verify Location</span>
+
+            </button>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="statusBox"
+                class="status">
+            </div>
+
+
+
+            <!-- =================================================
+                 FINAL CONFIRMATION
+            ================================================== -->
+
+            <div
+                class="confirm-section"
+                id="confirmSection">
+
+
+                <button
+                    class="confirm-button"
+                    onclick="confirmQueue()">
+
+                    <span data-i18n="confirmQueue">✓ Confirm Queue</span>
+
+                </button>
+
+
+                <p class="confirm-note">
+
+                    <span data-i18n="confirmNote1">Your location and QR code have been verified.</span>
+                    <span data-i18n="confirmNote2">Confirm to enter the queue.</span>
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                Government of India
+            </div>
+
+            <p>
+                Digital Queue
+            </p>
+
+            <p>
+                <span data-i18n="allRights">© 2026 All Rights Reserved</span>
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                <span data-i18n="importantLinks">Important Links</span>
+            </h3>
+
+            <a href="#">
+                <span data-i18n="aboutUs">About Us</span>
+            </a>
+
+            <a href="#">
+                <span data-i18n="terms">Terms & Conditions</span>
+            </a>
+
+            <a href="#">
+                <span data-i18n="privacy">Privacy Policy</span>
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                <span data-i18n="support">Support</span>
+            </h3>
+
+            <a href="#">
+                <span data-i18n="helpCenter">Help Center</span>
+            </a>
+
+            <a href="#">
+                <span data-i18n="faqs">FAQs</span>
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                <span data-i18n="followUs">Follow Us</span>
+            </h3>
+
+            <p>
+                <span data-i18n="facebook">Facebook</span>
+            </p>
+
+            <p>
+                <span data-i18n="twitter">Twitter</span>
+            </p>
+
+            <p>
+                <span data-i18n="youtube">YouTube</span>
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                <span data-i18n="downloadApp">Download Our App</span>
+            </h3>
+
+            <p>
+                <span data-i18n="googlePlay">Google Play</span>
+            </p>
+
+            <p>
+                <span data-i18n="appStore">App Store</span>
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span data-i18n="copyrightPrefix">© 2026 Digital Queue.</span>
+        <span data-i18n="copyrightSuffix">All Rights Reserved.</span>
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   LANGUAGE SYSTEM
+   Shared across all Digital Queue pages
+===================================================== */
+
+const translations = {
+
+    en: {
+        government: "Government of India",
+        digitalQueue: "Digital Queue",
+        tagline: "Easy. Quick. Transparent.",
+        loginProfile: "Login / Profile ▾",
+        home: "Home",
+        services: "Services",
+        myApplications: "My Applications",
+        queueStatus: "Queue Status",
+        offices: "Offices",
+        help: "Help",
+        search: "Search services, documents, offices...",
+
+        pageTitle: "QR & Location Verification",
+        pageDescription1: "Allow location access first.",
+        pageDescription2: "Your location must be within",
+        pageDescription3: "100 metres of the selected Ved Road service area.",
+        pageDescription4: "Then scan the official office QR code.",
+
+        allowLocationAccess: "Allow Location Access",
+        locationVerification: "Location Verification",
+        locationRequired1: "Your location is required to verify",
+        locationRequired2: "that you are at the selected",
+        locationRequired3: "government service area.",
+        within: "You must be within",
+        verificationPoint: "of the Ved Road verification point",
+        toContinue: "to continue.",
+        allowLocation: "Allow Location",
+        scanOfficeQR: "Scan Office QR Code",
+        positionQR1: "Position the official office QR code",
+        positionQR2: "inside the scanner.",
+        office: "Office",
+        officeId: "Office ID",
+        qrStatus: "QR Status",
+        distance: "Distance from verification point",
+        allowedDistance: "Allowed distance",
+        hundredMetres: "100 metres",
+        locationStatus: "Location status",
+        verifyOfficeLocation: "Verify Office Location",
+        verifyLocation: "Verify Location",
+        confirmQueue: "✓ Confirm Queue",
+        confirmNote1: "Your location and QR code have been verified.",
+        confirmNote2: "Confirm to enter the queue.",
+
+        notifications: "Notifications",
+        notification1: "📍 Location verification is required.",
+        notification2: "📷 Scan the official office QR code.",
+        notification3: "ℹ️ Stay within the allowed 100 metre area.",
+
+        importantLinks: "Important Links",
+        aboutUs: "About Us",
+        terms: "Terms & Conditions",
+        privacy: "Privacy Policy",
+        support: "Support",
+        helpCenter: "Help Center",
+        faqs: "FAQs",
+        followUs: "Follow Us",
+        downloadApp: "Download Our App",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        youtube: "YouTube",
+        googlePlay: "Google Play",
+        appStore: "App Store",
+        allRights: "© 2026 All Rights Reserved",
+        copyrightPrefix: "© 2026 Digital Queue.",
+        copyrightSuffix: "All Rights Reserved.",
+        documentTitle: "QR & Location Verification - Digital Queue"
+    },
+
+    hi: {
+        government: "भारत सरकार",
+        digitalQueue: "डिजिटल कतार",
+        tagline: "आसान। तेज़। पारदर्शी।",
+        loginProfile: "लॉगिन / प्रोफ़ाइल ▾",
+        home: "होम",
+        services: "सेवाएँ",
+        myApplications: "मेरे आवेदन",
+        queueStatus: "कतार स्थिति",
+        offices: "कार्यालय",
+        help: "सहायता",
+        search: "सेवाएँ, दस्तावेज़, कार्यालय खोजें...",
+
+        pageTitle: "क्यूआर और स्थान सत्यापन",
+        pageDescription1: "पहले स्थान की अनुमति दें।",
+        pageDescription2: "आपका स्थान",
+        pageDescription3: "चयनित वेड रोड सेवा क्षेत्र से 100 मीटर के भीतर होना चाहिए।",
+        pageDescription4: "फिर आधिकारिक कार्यालय क्यूआर कोड स्कैन करें।",
+
+        allowLocationAccess: "स्थान की अनुमति दें",
+        locationVerification: "स्थान सत्यापन",
+        locationRequired1: "आपका स्थान सत्यापित करना आवश्यक है",
+        locationRequired2: "कि आप चयनित",
+        locationRequired3: "सरकारी सेवा क्षेत्र में हैं।",
+        within: "आपको",
+        verificationPoint: "वेड रोड सत्यापन बिंदु से",
+        toContinue: "100 मीटर के भीतर होना चाहिए।",
+        allowLocation: "स्थान की अनुमति दें",
+        scanOfficeQR: "कार्यालय क्यूआर कोड स्कैन करें",
+        positionQR1: "आधिकारिक कार्यालय क्यूआर कोड को",
+        positionQR2: "स्कैनर के अंदर रखें।",
+        office: "कार्यालय",
+        officeId: "कार्यालय आईडी",
+        qrStatus: "क्यूआर स्थिति",
+        distance: "सत्यापन बिंदु से दूरी",
+        allowedDistance: "अनुमत दूरी",
+        hundredMetres: "100 मीटर",
+        locationStatus: "स्थान स्थिति",
+        verifyOfficeLocation: "कार्यालय स्थान सत्यापित करें",
+        verifyLocation: "स्थान सत्यापित करें",
+        confirmQueue: "✓ कतार की पुष्टि करें",
+        confirmNote1: "आपका स्थान और क्यूआर कोड सत्यापित हो गया है।",
+        confirmNote2: "कतार में प्रवेश करने के लिए पुष्टि करें।",
+
+        notifications: "सूचनाएँ",
+        notification1: "📍 स्थान सत्यापन आवश्यक है।",
+        notification2: "📷 आधिकारिक कार्यालय क्यूआर कोड स्कैन करें।",
+        notification3: "ℹ️ 100 मीटर की अनुमत सीमा के अंदर रहें।",
+
+        importantLinks: "महत्वपूर्ण लिंक",
+        aboutUs: "हमारे बारे में",
+        terms: "नियम एवं शर्तें",
+        privacy: "गोपनीयता नीति",
+        support: "सहायता",
+        helpCenter: "सहायता केंद्र",
+        faqs: "अक्सर पूछे जाने वाले प्रश्न",
+        followUs: "हमें फॉलो करें",
+        downloadApp: "हमारा ऐप डाउनलोड करें",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        youtube: "YouTube",
+        googlePlay: "Google Play",
+        appStore: "App Store",
+        allRights: "© 2026 सर्वाधिकार सुरक्षित",
+        copyrightPrefix: "© 2026 डिजिटल कतार।",
+        copyrightSuffix: "सर्वाधिकार सुरक्षित।",
+        documentTitle: "क्यूआर और स्थान सत्यापन - डिजिटल कतार"
+    },
+
+    gu: {
+        government: "ભારત સરકાર",
+        digitalQueue: "ડિજિટલ કતાર",
+        tagline: "સરળ. ઝડપી. પારદર્શક.",
+        loginProfile: "લૉગિન / પ્રોફાઇલ ▾",
+        home: "હોમ",
+        services: "સેવાઓ",
+        myApplications: "મારી અરજીઓ",
+        queueStatus: "કતાર સ્થિતિ",
+        offices: "કચેરીઓ",
+        help: "મદદ",
+        search: "સેવાઓ, દસ્તાવેજો, કચેરીઓ શોધો...",
+
+        pageTitle: "QR અને સ્થાન ચકાસણી",
+        pageDescription1: "પહેલા સ્થાનની પરવાનગી આપો.",
+        pageDescription2: "તમારું સ્થાન",
+        pageDescription3: "પસંદ કરેલા વેડ રોડ સેવા વિસ્તારથી 100 મીટરની અંદર હોવું જોઈએ.",
+        pageDescription4: "પછી સત્તાવાર કચેરીનો QR કોડ સ્કેન કરો.",
+
+        allowLocationAccess: "સ્થાનની પરવાનગી આપો",
+        locationVerification: "સ્થાન ચકાસણી",
+        locationRequired1: "તમારું સ્થાન ચકાસવું જરૂરી છે",
+        locationRequired2: "કે તમે પસંદ કરેલા",
+        locationRequired3: "સરકારી સેવા વિસ્તારમાં છો.",
+        within: "તમારે",
+        verificationPoint: "વેડ રોડ ચકાસણી બિંદુથી",
+        toContinue: "100 મીટરની અંદર હોવું જરૂરી છે.",
+        allowLocation: "સ્થાનની પરવાનગી આપો",
+        scanOfficeQR: "કચેરીનો QR કોડ સ્કેન કરો",
+        positionQR1: "સત્તાવાર કચેરીનો QR કોડ",
+        positionQR2: "સ્કેનરની અંદર રાખો.",
+        office: "કચેરી",
+        officeId: "કચેરી ID",
+        qrStatus: "QR સ્થિતિ",
+        distance: "ચકાસણી બિંદુથી અંતર",
+        allowedDistance: "મંજૂર અંતર",
+        hundredMetres: "100 મીટર",
+        locationStatus: "સ્થાન સ્થિતિ",
+        verifyOfficeLocation: "કચેરીનું સ્થાન ચકાસો",
+        verifyLocation: "સ્થાન ચકાસો",
+        confirmQueue: "✓ કતારની પુષ્ટિ કરો",
+        confirmNote1: "તમારું સ્થાન અને QR કોડ ચકાસાઈ ગયા છે.",
+        confirmNote2: "કતારમાં પ્રવેશવા માટે પુષ્ટિ કરો.",
+
+        notifications: "સૂચનાઓ",
+        notification1: "📍 સ્થાન ચકાસણી જરૂરી છે.",
+        notification2: "📷 સત્તાવાર કચેરીનો QR કોડ સ્કેન કરો.",
+        notification3: "ℹ️ 100 મીટરની મંજૂર મર્યાદામાં રહો.",
+
+        importantLinks: "મહત્વપૂર્ણ લિંક્સ",
+        aboutUs: "અમારા વિશે",
+        terms: "નિયમો અને શરતો",
+        privacy: "ગોપનીયતા નીતિ",
+        support: "સહાય",
+        helpCenter: "સહાય કેન્દ્ર",
+        faqs: "વારંવાર પૂછાતા પ્રશ્નો",
+        followUs: "અમને ફોલો કરો",
+        downloadApp: "અમારી એપ ડાઉનલોડ કરો",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        youtube: "YouTube",
+        googlePlay: "Google Play",
+        appStore: "App Store",
+        allRights: "© 2026 સર્વાધિકાર સુરક્ષિત",
+        copyrightPrefix: "© 2026 ડિજિટલ કતાર.",
+        copyrightSuffix: "સર્વાધિકાર સુરક્ષિત.",
+        documentTitle: "QR અને સ્થાન ચકાસણી - ડિજિટલ કતાર"
+    }
+};
+
+function setLanguage(lang) {
+
+    const data = translations[lang] || translations.en;
+
+    document.querySelectorAll("[data-i18n]").forEach(function(element) {
+        const key = element.getAttribute("data-i18n");
+
+        if (data[key] !== undefined) {
+            element.textContent = data[key];
+        }
+    });
+
+    document.querySelectorAll("[data-placeholder]").forEach(function(element) {
+        const key = element.getAttribute("data-placeholder");
+
+        if (data[key] !== undefined) {
+            element.placeholder = data[key];
+        }
+    });
+
+    document.title = data.documentTitle;
+
+    localStorage.setItem("selectedLanguage", lang);
+
+    const languageNames = {
+        en: "English",
+        hi: "हिंदी",
+        gu: "ગુજરાતી"
+    };
+
+    const current = document.getElementById("currentLanguage");
+
+    if (current) {
+        current.textContent = languageNames[lang] || "English";
+    }
+
+    const menu = document.getElementById("languageMenu");
+
+    if (menu) {
+        menu.classList.remove("show");
+    }
+}
+
+function toggleLanguageMenu(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const menu = document.getElementById("languageMenu");
+
+    if (menu) {
+        menu.classList.toggle("show");
+    }
+}
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+/*
+ * Ved Road reference point.
+ *
+ * These are a reference point for the demo.
+ * For the final project, use the exact coordinates
+ * of the government office where the QR code is placed.
+ */
+
+const OFFICE_LATITUDE = 21.2294;
+const OFFICE_LONGITUDE = 72.8218;
+
+
+/*
+ * Maximum allowed distance.
+ */
+
+const MAX_DISTANCE_METERS = 100;
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let html5QrcodeScanner = null;
+
+let locationObtained = false;
+
+let scannedQR = false;
+
+let locationVerified = false;
+
+let qrOfficeId = "";
+
+let qrOfficeName = "";
+
+let userLatitude = null;
+
+let userLongitude = null;
+
+let userAccuracy = null;
+
+
+/* =====================================================
+   STEP 1
+   REQUEST LOCATION
+===================================================== */
+
+function requestLocationPermission() {
+
+
+    if (!navigator.geolocation) {
+
+        showStatus(
+            "Location services are not supported by this browser.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "allowLocationButton"
+        );
+
+
+    button.disabled = true;
+
+
+    showStatus(
+        "Requesting location permission...",
+        "processing"
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+
+            userLatitude =
+                position.coords.latitude;
+
+
+            userLongitude =
+                position.coords.longitude;
+
+
+            userAccuracy =
+                position.coords.accuracy;
+
+
+            locationObtained = true;
+
+
+            console.log(
+                "Latitude:",
+                userLatitude
+            );
+
+
+            console.log(
+                "Longitude:",
+                userLongitude
+            );
+
+
+            console.log(
+                "Accuracy:",
+                userAccuracy
+            );
+
+
+            /*
+             * Calculate distance immediately.
+             */
+
+            const distance =
+                calculateDistance(
+                    userLatitude,
+                    userLongitude,
+                    OFFICE_LATITUDE,
+                    OFFICE_LONGITUDE
+                );
+
+
+            console.log(
+                "Distance:",
+                distance,
+                "meters"
+            );
+
+
+            /*
+             * Show location result.
+             */
+
+            document
+                .getElementById(
+                    "locationResult"
+                )
+                .style.display =
+                "block";
+
+
+            document
+                .getElementById(
+                    "distanceValue"
+                )
+                .textContent =
+                Math.round(distance) +
+                " metres";
+
+
+            /*
+             * Check 100 metre requirement.
+             */
+
+            if (
+                distance <=
+                MAX_DISTANCE_METERS
+            ) {
+
+
+                document
+                    .getElementById(
+                        "locationStatus"
+                    )
+                    .textContent =
+                    "WITHIN ALLOWED AREA";
+
+
+                document
+                    .getElementById(
+                        "locationStatus"
+                    )
+                    .style.color =
+                    "#2E7D32";
+
+
+                /*
+                 * Hide location permission box.
+                 */
+
+                document
+                    .getElementById(
+                        "locationPermissionBox"
+                    )
+                    .style.display =
+                    "none";
+
+
+                /*
+                 * Show QR section.
+                 */
+
+                document
+                    .getElementById(
+                        "qrSection"
+                    )
+                    .style.display =
+                    "block";
+
+
+                showStatus(
+                    "Location verified. You are within the allowed 100 metre area. Please scan the office QR code.",
+                    "success"
+                );
+
+
+                /*
+                 * Start QR scanner.
+                 */
+
+                startQRScanner();
+
+            }
+
+            else {
+
+
+                document
+                    .getElementById(
+                        "locationStatus"
+                    )
+                    .textContent =
+                    "OUTSIDE ALLOWED AREA";
+
+
+                document
+                    .getElementById(
+                        "locationStatus"
+                    )
+                    .style.color =
+                    "#C62828";
+
+
+                button.disabled =
+                    false;
+
+
+                showStatus(
+                    "You are outside the allowed 100 metre area. Please move closer to the Ved Road service location.",
+                    "error"
+                );
+
+            }
+
+        },
+
+
+        function(error) {
+
+
+            button.disabled =
+                false;
+
+
+            if (
+                error.code === 1
+            ) {
+
+                showStatus(
+                    "Location permission denied. Please allow location access.",
+                    "error"
+                );
+
+            }
+
+            else if (
+                error.code === 2
+            ) {
+
+                showStatus(
+                    "Your location could not be determined.",
+                    "error"
+                );
+
+            }
+
+            else if (
+                error.code === 3
+            ) {
+
+                showStatus(
+                    "Location request timed out. Please try again.",
+                    "error"
+                );
+
+            }
+
+            else {
+
+                showStatus(
+                    "Unable to get your location.",
+                    "error"
+                );
+
+            }
+
+        },
+
+
+        {
+            enableHighAccuracy: true,
+
+            timeout: 15000,
+
+            maximumAge: 0
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   DISTANCE CALCULATION
+===================================================== */
+
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
+
+
+    const earthRadius =
+        6371000;
+
+
+    const lat1Rad =
+        lat1 *
+        Math.PI /
+        180;
+
+
+    const lat2Rad =
+        lat2 *
+        Math.PI /
+        180;
+
+
+    const deltaLat =
+        (
+            lat2 -
+            lat1
+        ) *
+        Math.PI /
+        180;
+
+
+    const deltaLon =
+        (
+            lon2 -
+            lon1
+        ) *
+        Math.PI /
+        180;
+
+
+    const a =
+        Math.sin(
+            deltaLat / 2
+        ) *
+        Math.sin(
+            deltaLat / 2
+        )
+        +
+        Math.cos(lat1Rad)
+        *
+        Math.cos(lat2Rad)
+        *
+        Math.sin(
+            deltaLon / 2
+        )
+        *
+        Math.sin(
+            deltaLon / 2
+        );
+
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+
+    return earthRadius * c;
+
+}
+
+
+/* =====================================================
+   STEP 2
+   START QR SCANNER
+===================================================== */
+
+function startQRScanner() {
+
+
+    if (
+        html5QrcodeScanner !== null
+    ) {
+
+        return;
+
+    }
+
+
+    html5QrcodeScanner =
+        new Html5QrcodeScanner(
+
+            "reader",
+
+            {
+                fps: 10,
+
+                qrbox: {
+                    width: 250,
+                    height: 250
+                },
+
+                rememberLastUsedCamera:
+                    true
+            },
+
+            false
+        );
+
+
+    html5QrcodeScanner.render(
+        onScanSuccess,
+        onScanFailure
+    );
+
+}
+
+
+/* =====================================================
+   QR SCAN SUCCESS
+===================================================== */
+
+function onScanSuccess(
+    decodedText,
+    decodedResult
+) {
+
+
+    console.log(
+        "QR DATA:",
+        decodedText
+    );
+
+
+    /*
+     * Expected QR:
+     *
+     * OFFICE_ID=VED_ROAD_01;
+     * OFFICE_NAME=VED_ROAD_SERVICE_CENTER
+     */
+
+
+    const qrData =
+        decodedText.split(";");
+
+
+    /*
+     * Reset values.
+     */
+
+    qrOfficeId = "";
+
+    qrOfficeName = "";
+
+
+    qrData.forEach(
+        function(item) {
+
+
+            const parts =
+                item.split("=");
+
+
+            if (
+                parts.length === 2
+            ) {
+
+
+                const key =
+                    parts[0]
+                    .trim()
+                    .toUpperCase();
+
+
+                const value =
+                    parts[1]
+                    .trim();
+
+
+                if (
+                    key ===
+                    "OFFICE_ID"
+                ) {
+
+                    qrOfficeId =
+                        value;
+
+                }
+
+
+                if (
+                    key ===
+                    "OFFICE_NAME"
+                ) {
+
+                    qrOfficeName =
+                        value;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Invalid QR.
+     */
+
+    if (
+        !qrOfficeId
+    ) {
+
+        showStatus(
+            "Invalid QR code. Please scan the official office QR code.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * QR verified.
+     */
+
+    scannedQR = true;
+
+
+    /*
+     * Display result.
+     */
+
+    document
+        .getElementById(
+            "officeName"
+        )
+        .textContent =
+        qrOfficeName ||
+        "Ved Road Service Center";
+
+
+    document
+        .getElementById(
+            "officeId"
+        )
+        .textContent =
+        qrOfficeId;
+
+
+    document
+        .getElementById(
+            "qrStatus"
+        )
+        .textContent =
+        "VERIFIED";
+
+
+    document
+        .getElementById(
+            "resultBox"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "scanMessage"
+        )
+        .textContent =
+        "QR code scanned successfully.";
+
+
+    /*
+     * Enable final location check.
+     */
+
+    document
+        .getElementById(
+            "locationButton"
+        )
+        .disabled =
+        false;
+
+
+    showStatus(
+        "QR code verified. Now verify your location.",
+        "success"
+    );
+
+
+    /*
+     * Stop scanner.
+     */
+
+    if (
+        html5QrcodeScanner !== null
+    ) {
+
+
+        html5QrcodeScanner
+            .clear()
+            .catch(
+                function(error) {
+
+                    console.log(
+                        "Scanner stop error:",
+                        error
+                    );
+
+                }
+            );
+
+
+        html5QrcodeScanner =
+            null;
+
+    }
+
+}
+
+
+/* =====================================================
+   QR SCAN FAILURE
+===================================================== */
+
+function onScanFailure(error) {
+
+    /*
+     * Continuous scanning is normal.
+     */
+
+}
+
+
+/* =====================================================
+   STEP 3
+   VERIFY LOCATION AGAIN
+===================================================== */
+
+function verifyOfficeLocation() {
+
+
+    if (
+        !scannedQR
+    ) {
+
+        showStatus(
+            "Please scan the office QR code first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !locationObtained ||
+        userLatitude === null ||
+        userLongitude === null
+    ) {
+
+        showStatus(
+            "Location information is not available.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    showStatus(
+        "Checking your location...",
+        "processing"
+    );
+
+
+    /*
+     * Calculate current distance.
+     */
+
+    const distance =
+        calculateDistance(
+            userLatitude,
+            userLongitude,
+            OFFICE_LATITUDE,
+            OFFICE_LONGITUDE
+        );
+
+
+    document
+        .getElementById(
+            "distanceValue"
+        )
+        .textContent =
+        Math.round(distance) +
+        " metres";
+
+
+    /*
+     * Within 100 metres.
+     */
+
+    if (
+        distance <=
+        MAX_DISTANCE_METERS
+    ) {
+
+
+        locationVerified =
+            true;
+
+
+        document
+            .getElementById(
+                "locationStatus"
+            )
+            .textContent =
+            "VERIFIED";
+
+
+        document
+            .getElementById(
+                "locationStatus"
+            )
+            .style.color =
+            "#2E7D32";
+
+
+        /*
+         * Save verification data.
+         */
+
+        sessionStorage.setItem(
+            "officeId",
+            qrOfficeId
+        );
+
+
+        sessionStorage.setItem(
+            "officeName",
+            qrOfficeName
+        );
+
+
+        sessionStorage.setItem(
+            "locationVerified",
+            "true"
+        );
+
+
+        sessionStorage.setItem(
+            "distanceFromOffice",
+            Math.round(distance)
+        );
+
+
+        /*
+         * Show success.
+         */
+
+        showStatus(
+            "Location verified successfully. You are within 100 metres of the Ved Road service area.",
+            "success"
+        );
+
+
+        /*
+         * Hide verify button.
+         */
+
+        document
+            .getElementById(
+                "locationButton"
+            )
+            .style.display =
+            "none";
+
+
+        /*
+         * Show confirm button.
+         */
+
+        document
+            .getElementById(
+                "confirmSection"
+            )
+            .style.display =
+            "block";
+
+    }
+
+    else {
+
+
+        locationVerified =
+            false;
+
+
+        document
+            .getElementById(
+                "locationStatus"
+            )
+            .textContent =
+            "OUTSIDE ALLOWED AREA";
+
+
+        document
+            .getElementById(
+                "locationStatus"
+            )
+            .style.color =
+            "#C62828";
+
+
+        showStatus(
+            "Verification failed. You are outside the allowed 100 metre area.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CONFIRM QUEUE
+===================================================== */
+
+function confirmQueue() {
+
+
+    if (
+        !scannedQR
+    ) {
+
+        alert(
+            "Please scan the office QR code first."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !locationVerified
+    ) {
+
+        alert(
+            "Please verify your location first."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Save queue confirmation.
+     */
+
+    sessionStorage.setItem(
+        "queueConfirmed",
+        "true"
+    );
+
+
+    /*
+     * Continue to Queue Status.
+     */
+
+    window.location.href =
+        "queue.html";
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function openProfile() {
+
+
+    const isLoggedIn =
+        localStorage.getItem(
+            "isLoggedIn"
+        );
+
+
+    if (
+        isLoggedIn === "true"
+    ) {
+
+        window.location.href =
+            "profile.html";
+
+    }
+
+    else {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+function toggleNotifications() {
+
+
+    document
+        .getElementById(
+            "notificationPanel"
+        )
+        .classList.toggle(
+            "show"
+        );
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+
+        const wrapper =
+            document.querySelector(
+                ".notification-wrapper"
+            );
+
+
+        const panel =
+            document.getElementById(
+                "notificationPanel"
+            );
+
+
+        if (
+            !wrapper.contains(
+                event.target
+            )
+        ) {
+
+            panel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function performSearch() {
+
+
+    const query =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .trim();
+
+
+    if (
+        query === ""
+    ) {
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "service.html?search=" +
+        encodeURIComponent(
+            query
+        );
+
+}
+
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                performSearch();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

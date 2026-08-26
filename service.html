@@ -10,7 +10,9 @@
 
 <style>
 
-/* ================= RESET ================= */
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     margin: 0;
@@ -25,7 +27,9 @@ body {
 }
 
 
-/* ================= HEADER ================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
 header {
     background: #0D47A1;
@@ -37,23 +41,24 @@ header {
     align-items: center;
     justify-content: space-between;
 
-    padding: 12px 45px;
+    padding: 12px 35px;
+
+    gap: 25px;
 }
 
 
-/* ================= GOVERNMENT LOGO ================= */
+/* =====================================================
+   LOGO
+===================================================== */
 
 .gov-logo {
     display: flex;
     align-items: center;
+
     gap: 15px;
+
+    min-width: 300px;
 }
-
-
-/* IMPORTANT:
-   No white background here.
-   This gives the second logo style.
-*/
 
 .emblem {
     width: 65px;
@@ -61,7 +66,6 @@ header {
 
     object-fit: contain;
 }
-
 
 .gov-text h2 {
     font-size: 21px;
@@ -78,10 +82,28 @@ header {
 }
 
 
-/* ================= SEARCH ================= */
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.header-right {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    flex: 1;
+
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 .search-box {
-    width: 390px;
+    width: min(390px, 40vw);
     height: 42px;
 
     background: white;
@@ -91,7 +113,7 @@ header {
     display: flex;
     align-items: center;
 
-    padding: 0 14px;
+    padding: 0 13px;
 }
 
 .search-box input {
@@ -114,31 +136,174 @@ header {
 }
 
 
-/* ================= PROFILE ================= */
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification-wrapper {
+    position: relative;
+}
+
+.notification-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+
+    color: #0D47A1;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.notification-btn:hover {
+    background: #EAF2FF;
+}
+
+.notification-badge {
+    position: absolute;
+
+    top: -3px;
+    right: -3px;
+
+    background: #D32F2F;
+
+    color: white;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
+
+.notification-panel {
+    display: none;
+
+    position: absolute;
+
+    right: 0;
+    top: 52px;
+
+    width: 320px;
+
+    background: white;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.18);
+
+    z-index: 1000;
+
+    color: #14213D;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-header {
+    padding: 15px;
+
+    border-bottom:
+        1px solid #E5E7EB;
+
+    font-weight: bold;
+}
+
+.notification-item {
+    padding: 13px 15px;
+
+    border-bottom:
+        1px solid #F0F0F0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
 
 .profile {
-    font-size: 15px;
+    font-size: 14px;
 
     font-weight: bold;
 
     cursor: pointer;
+
+    white-space: nowrap;
 }
 
 
-/* ================= NAVIGATION ================= */
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+.language-select {
+    height: 42px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 0 10px;
+
+    background: white;
+
+    color: #14213D;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 nav {
     background: white;
 
-    height: 55px;
+    min-height: 55px;
 
     display: flex;
     align-items: center;
 
-    padding-left: 40px;
+    padding-left: 25px;
 
     box-shadow:
         0 2px 6px rgba(0,0,0,0.08);
+
+    overflow-x: auto;
 }
 
 nav a {
@@ -151,6 +316,8 @@ nav a {
     height: 55px;
 
     font-size: 14px;
+
+    white-space: nowrap;
 }
 
 nav a:hover {
@@ -167,18 +334,24 @@ nav a.active {
 }
 
 
-/* ================= MAIN CONTAINER ================= */
+/* =====================================================
+   MAIN
+===================================================== */
 
 .container {
-    max-width: 1100px;
+    width: 100%;
 
-    margin: 40px auto;
+    max-width: 1500px;
 
-    padding: 0 25px;
+    margin: 30px auto;
+
+    padding: 0 30px;
 }
 
 
-/* ================= PAGE TITLE ================= */
+/* =====================================================
+   PAGE TITLE
+===================================================== */
 
 .page-title {
     background: #0D47A1;
@@ -187,11 +360,11 @@ nav a.active {
 
     text-align: center;
 
-    padding: 18px;
+    padding: 20px;
 
     border-radius: 7px;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .page-title h1 {
@@ -199,16 +372,18 @@ nav a.active {
 }
 
 
-/* ================= PAGE DESCRIPTION ================= */
+/* =====================================================
+   DESCRIPTION
+===================================================== */
 
 .page-description {
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .page-description h2 {
     font-size: 21px;
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
 .page-description p {
@@ -218,10 +393,11 @@ nav a.active {
 }
 
 
-/* ================= SEARCH RESULT ================= */
+/* =====================================================
+   SEARCH RESULT
+===================================================== */
 
 .search-result {
-
     display: none;
 
     background: #EAF2FF;
@@ -241,19 +417,23 @@ nav a.active {
 }
 
 
-/* ================= SERVICE GRID ================= */
+/* =====================================================
+   SERVICE GRID
+===================================================== */
 
 .service-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(3, 1fr);
 
-    gap: 22px;
+    gap: 20px;
 }
 
 
-/* ================= SERVICE CARD ================= */
+/* =====================================================
+   SERVICE CARD
+===================================================== */
 
 .service-card {
     background: white;
@@ -263,25 +443,25 @@ nav a.active {
 
     border-radius: 10px;
 
-    padding: 25px;
+    padding: 23px;
 
     box-shadow:
         0 3px 12px rgba(0,0,0,0.06);
 
     transition: 0.2s;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
-
-    transform:
-        translateY(-3px);
+    transform: translateY(-3px);
 
     box-shadow:
         0 6px 18px rgba(0,0,0,0.10);
 }
 
 .service-card h2 {
-
     color: #0D47A1;
 
     font-size: 19px;
@@ -290,37 +470,34 @@ nav a.active {
 }
 
 .service-card p {
-
     color: #697586;
 
     font-size: 13px;
 
     line-height: 1.6;
 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
 .service-card strong {
-
     color: #14213D;
 }
 
 
-/* ================= APPLY BUTTON ================= */
+/* =====================================================
+   APPLY BUTTON
+===================================================== */
 
 .apply-btn {
+    margin-top: auto;
 
-    display: inline-block;
-
-    margin-top: 15px;
+    padding: 11px 25px;
 
     background: #0D47A1;
 
     color: white;
 
     border: none;
-
-    padding: 11px 25px;
 
     border-radius: 5px;
 
@@ -332,15 +509,15 @@ nav a.active {
 }
 
 .apply-btn:hover {
-
     background: #1565C0;
 }
 
 
-/* ================= NO RESULT ================= */
+/* =====================================================
+   NO RESULT
+===================================================== */
 
 .no-result {
-
     display: none;
 
     background: white;
@@ -350,7 +527,7 @@ nav a.active {
 
     border-radius: 10px;
 
-    padding: 35px;
+    padding: 40px;
 
     text-align: center;
 
@@ -360,43 +537,45 @@ nav a.active {
 }
 
 
-/* ================= FOOTER ================= */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer {
-
     background: #0D47A1;
 
     color: white;
 
-    margin-top: 50px;
+    margin-top: 45px;
 
-    padding: 35px 50px 20px;
+    padding: 35px 40px 20px;
 }
 
 .footer-content {
+    max-width: 1500px;
 
-    display: flex;
+    margin: auto;
 
-    justify-content: space-between;
+    display: grid;
 
-    gap: 35px;
+    grid-template-columns:
+        1.5fr repeat(4, 1fr);
+
+    gap: 30px;
 }
 
 .footer-column {
-
     flex: 1;
 }
 
 .footer-column h3 {
-
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 
     font-size: 16px;
 }
 
 .footer-column p,
 .footer-column a {
-
     color: white;
 
     text-decoration: none;
@@ -409,23 +588,22 @@ footer {
 }
 
 .footer-column a:hover {
-
     text-decoration: underline;
 }
 
 .footer-logo {
-
-    font-size: 20px;
+    font-size: 19px;
 
     font-weight: bold;
 }
 
 .footer-bottom {
+    max-width: 1500px;
+
+    margin: 25px auto 0;
 
     border-top:
         1px solid rgba(255,255,255,0.3);
-
-    margin-top: 25px;
 
     padding-top: 15px;
 
@@ -435,48 +613,103 @@ footer {
 }
 
 
-/* ================= MOBILE ================= */
+/* =====================================================
+   TABLET
+===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
 
     header {
-
-        flex-direction: column;
-
-        gap: 15px;
-
-        padding: 20px;
+        flex-wrap: wrap;
     }
 
-    .search-box {
+    .gov-logo {
+        min-width: auto;
+    }
 
+    .header-right {
         width: 100%;
     }
 
-    nav {
-
-        padding-left: 0;
-
-        overflow-x: auto;
-    }
-
-    nav a {
-
-        white-space: nowrap;
-
-        padding: 19px 14px;
+    .search-box {
+        width: 100%;
+        max-width: 500px;
     }
 
     .service-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
 
+    .footer-content {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+
+        padding: 18px;
+
+        align-items: stretch;
+    }
+
+    .gov-logo {
+        justify-content: center;
+    }
+
+    .header-right {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .profile {
+        font-size: 13px;
+    }
+
+    nav {
+        padding-left: 0;
+    }
+
+    nav a {
+        padding: 19px 14px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .service-grid {
         grid-template-columns: 1fr;
     }
 
     .footer-content {
-
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
+    .notification-panel {
+        position: fixed;
+
+        top: 100px;
+
+        left: 15px;
+        right: 15px;
+
+        width: auto;
+    }
 }
 
 </style>
@@ -487,25 +720,25 @@ footer {
 <body>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
 
-    <!-- GOVERNMENT LOGO -->
+    <!-- LOGO -->
 
     <div class="gov-logo">
-
 
         <img
             class="emblem"
             src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
             alt="Ashoka Emblem">
 
-
         <div class="gov-text">
 
-            <h2>
+            <h2 data-key="government">
                 Government of India
             </h2>
 
@@ -513,60 +746,168 @@ footer {
                 Digital Queue
             </h3>
 
-            <p>
+            <p data-key="tagline">
                 Easy. Quick. Transparent.
             </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEADER RIGHT -->
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                data-placeholder="searchPlaceholder"
+                placeholder="Search services, documents, offices..."
+                autocomplete="off">
+
+            <span
+                class="search-icon"
+                onclick="performSearch()">
+
+                🔍
+
+            </span>
+
+        </div>
+
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification-wrapper">
+
+            <button
+                class="notification-btn"
+                onclick="toggleNotifications()"
+                aria-label="Notifications">
+
+                🔔
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </button>
+
+
+            <div
+                class="notification-panel"
+                id="notificationPanel">
+
+
+                <div
+                    class="notification-header"
+                    data-key="notifications">
+
+                    Notifications
+
+                </div>
+
+
+                <div class="notification-item">
+
+                    🔔
+                    <span data-key="notification1">
+                        Your application status has been updated.
+                    </span>
+
+                </div>
+
+
+                <div class="notification-item">
+
+                    📍
+                    <span data-key="notification2">
+                        Queue confirmation is required before visiting the office.
+                    </span>
+
+                </div>
+
+
+                <div class="notification-item">
+
+                    ℹ️
+                    <span data-key="notification3">
+                        Check available government services.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- LANGUAGE -->
+
+        <select
+            class="language-select"
+            id="languageSelect"
+            onchange="changeLanguage(this.value)">
+
+            <option value="en">
+                English
+            </option>
+
+            <option value="hi">
+                हिन्दी
+            </option>
+
+            <option value="gu">
+                ગુજરાતી
+            </option>
+
+        </select>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="profile"
+            onclick="openProfile()">
+
+            👤
+
+            <span data-key="loginProfile">
+                Login / Profile
+            </span>
+
+            ▾
 
         </div>
 
 
     </div>
 
-
-    <!-- ================= SEARCH BAR ================= -->
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search services, documents, offices..."
-            autocomplete="off">
-
-        <span
-            class="search-icon"
-            onclick="performSearch()">
-
-            🔍
-
-        </span>
-
-    </div>
-
-
-    <!-- ================= PROFILE ================= -->
-
-    <div
-        class="profile"
-        onclick="openProfile()">
-
-        👤 &nbsp; Login / Profile ▾
-
-    </div>
-
-
 </header>
 
 
 
-<!-- ================= NAVIGATION ================= -->
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <nav>
 
 
     <a href="home.html">
 
-        ⌂ &nbsp; Home
+        ⌂ &nbsp;
+
+        <span data-key="home">
+            Home
+        </span>
 
     </a>
 
@@ -575,42 +916,54 @@ footer {
         href="service.html"
         class="active">
 
-        ▣ &nbsp; Services
+        ▣ &nbsp;
+
+        <span data-key="services">
+            Services
+        </span>
 
     </a>
 
 
     <a href="myapplication.html">
 
-        ▣ &nbsp; My Applications
+        ▣ &nbsp;
+
+        <span data-key="applications">
+            My Applications
+        </span>
 
     </a>
 
 
     <a href="queue.html">
 
-        ☷ &nbsp; Queue Status
+        ☷ &nbsp;
+
+        <span data-key="queue">
+            Queue Status
+        </span>
 
     </a>
 
 
     <a href="offinfo.html">
 
-        🏛 &nbsp; Offices
+        🏛 &nbsp;
+
+        <span data-key="offices">
+            Offices
+        </span>
 
     </a>
 
-
     <a href="#">
 
-        ☎ &nbsp; Contact Us
+        ? &nbsp;
 
-    </a>
-
-
-    <a href="#">
-
-        ? &nbsp; Help
+        <span data-key="help">
+            Help
+        </span>
 
     </a>
 
@@ -619,7 +972,9 @@ footer {
 
 
 
-<!-- ================= MAIN ================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main class="container">
 
@@ -628,7 +983,7 @@ footer {
 
     <div class="page-title">
 
-        <h1>
+        <h1 data-key="governmentServices">
             Government Services
         </h1>
 
@@ -639,11 +994,11 @@ footer {
 
     <div class="page-description">
 
-        <h2>
+        <h2 data-key="availableServices">
             Available Services
         </h2>
 
-        <p>
+        <p data-key="serviceDescription">
             Select the service you require and click
             Apply to continue with your application.
         </p>
@@ -660,7 +1015,9 @@ footer {
     </div>
 
 
-    <!-- ================= SERVICE GRID ================= -->
+    <!-- =================================================
+         SERVICES
+    ================================================= -->
 
     <div
         class="service-grid"
@@ -674,56 +1031,55 @@ footer {
             data-search="
                 aadhaar
                 aadhar
-                aadhaar card
                 identity
-                address proof
+                address
                 update
                 correction
             ">
 
-            <h2>
+            <h2 data-key="aadhaar">
                 Aadhaar Card
             </h2>
 
-            <p>
+            <p data-key="aadhaarDescription">
                 Apply for Aadhaar related services,
                 updates and corrections.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Identity proof and address proof.
-
+                <span data-key="aadhaarDocuments">
+                    Identity proof and address proof.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Citizens requiring Aadhaar services.
-
+                <span data-key="aadhaarRequired">
+                    Citizens requiring Aadhaar services.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                Indian residents eligible for Aadhaar.
-
+                <span data-key="aadhaarEligibility">
+                    Indian residents eligible for Aadhaar.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('Aadhaar Card')">
+                onclick="applyService('Aadhaar Card')"
+                data-key="apply">
 
                 Apply
 
@@ -733,62 +1089,61 @@ footer {
 
 
 
-        <!-- ================= PAN CARD ================= -->
+        <!-- ================= PAN ================= -->
 
         <div
             class="service-card"
             data-search="
                 pan
-                pan card
                 pancard
-                identity proof
-                date of birth
+                identity
+                date
                 tax
             ">
 
-            <h2>
+            <h2 data-key="pan">
                 PAN Card
             </h2>
 
-            <p>
+            <p data-key="panDescription">
                 Apply for a new PAN card or
                 PAN related services.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Identity proof and date of birth proof.
-
+                <span data-key="panDocuments">
+                    Identity proof and date of birth proof.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Citizens requiring PAN services.
-
+                <span data-key="panRequired">
+                    Citizens requiring PAN services.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                Eligible Indian citizens and entities.
-
+                <span data-key="panEligibility">
+                    Eligible Indian citizens and entities.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('PAN Card')">
+                onclick="applyService('PAN Card')"
+                data-key="apply">
 
                 Apply
 
@@ -798,62 +1153,61 @@ footer {
 
 
 
-        <!-- ================= RATION CARD ================= -->
+        <!-- ================= RATION ================= -->
 
         <div
             class="service-card"
             data-search="
                 ration
-                ration card
                 food
                 family
                 household
                 identity
             ">
 
-            <h2>
+            <h2 data-key="ration">
                 Ration Card
             </h2>
 
-            <p>
+            <p data-key="rationDescription">
                 Apply for a new ration card or
                 update existing ration card details.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Identity and family-related documents.
-
+                <span data-key="rationDocuments">
+                    Identity and family-related documents.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Eligible households.
-
+                <span data-key="rationRequired">
+                    Eligible households.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                As per applicable government rules.
-
+                <span data-key="rationEligibility">
+                    As per applicable government rules.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('Ration Card')">
+                onclick="applyService('Ration Card')"
+                data-key="apply">
 
                 Apply
 
@@ -863,63 +1217,61 @@ footer {
 
 
 
-        <!-- ================= BIRTH CERTIFICATE ================= -->
+        <!-- ================= BIRTH ================= -->
 
         <div
             class="service-card"
             data-search="
                 birth
-                birth certificate
                 certificate
                 newborn
                 child
                 registration
             ">
 
-            <h2>
+            <h2 data-key="birth">
                 Birth Certificate
             </h2>
 
-            <p>
+            <p data-key="birthDescription">
                 Apply for a birth certificate
                 or related corrections.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Birth and identity related documents.
-
+                <span data-key="birthDocuments">
+                    Birth and identity related documents.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Parents or authorized applicants.
-
+                <span data-key="birthRequired">
+                    Parents or authorized applicants.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                Applicants eligible under
-                registration rules.
-
+                <span data-key="birthEligibility">
+                    Applicants eligible under registration rules.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('Birth Certificate')">
+                onclick="applyService('Birth Certificate')"
+                data-key="apply">
 
                 Apply
 
@@ -929,61 +1281,60 @@ footer {
 
 
 
-        <!-- ================= CASTE CERTIFICATE ================= -->
+        <!-- ================= CASTE ================= -->
 
         <div
             class="service-card"
             data-search="
                 caste
-                caste certificate
+                certificate
                 identity
                 supporting
-                certificate
             ">
 
-            <h2>
+            <h2 data-key="caste">
                 Caste Certificate
             </h2>
 
-            <p>
+            <p data-key="casteDescription">
                 Apply for a caste certificate
                 for official purposes.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Identity and supporting caste documents.
-
+                <span data-key="casteDocuments">
+                    Identity and supporting caste documents.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Eligible applicants requiring certification.
-
+                <span data-key="casteRequired">
+                    Eligible applicants requiring certification.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                As per applicable government rules.
-
+                <span data-key="casteEligibility">
+                    As per applicable government rules.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('Caste Certificate')">
+                onclick="applyService('Caste Certificate')"
+                data-key="apply">
 
                 Apply
 
@@ -993,62 +1344,60 @@ footer {
 
 
 
-        <!-- ================= INCOME CERTIFICATE ================= -->
+        <!-- ================= INCOME ================= -->
 
         <div
             class="service-card"
             data-search="
                 income
-                income certificate
                 salary
                 financial
                 proof
             ">
 
-            <h2>
+            <h2 data-key="income">
                 Income Certificate
             </h2>
 
-            <p>
+            <p data-key="incomeDescription">
                 Apply for an income certificate
                 for official and government purposes.
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="documents">
                     Documents:
                 </strong>
 
-                Identity and income-related documents.
-
+                <span data-key="incomeDocuments">
+                    Identity and income-related documents.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="requiredFor">
                     Required for:
                 </strong>
 
-                Applicants requiring income verification.
-
+                <span data-key="incomeRequired">
+                    Applicants requiring income verification.
+                </span>
             </p>
 
             <p>
-
-                <strong>
+                <strong data-key="eligibility">
                     Eligibility:
                 </strong>
 
-                Eligible residents as per
-                applicable rules.
-
+                <span data-key="incomeEligibility">
+                    Eligible residents as per applicable rules.
+                </span>
             </p>
-
 
             <button
                 class="apply-btn"
-                onclick="applyService('Income Certificate')">
+                onclick="applyService('Income Certificate')"
+                data-key="apply">
 
                 Apply
 
@@ -1060,21 +1409,22 @@ footer {
     </div>
 
 
-
-    <!-- ================= NO RESULT ================= -->
+    <!-- NO RESULT -->
 
     <div
         class="no-result"
         id="noResult">
 
-        <strong>
+        <strong data-key="noServices">
             No services found.
         </strong>
 
         <br><br>
 
-        Try searching for another service,
-        document or keyword.
+        <span data-key="trySearch">
+            Try searching for another service,
+            document or keyword.
+        </span>
 
     </div>
 
@@ -1083,13 +1433,17 @@ footer {
 
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
 
     <div class="footer-content">
 
+
+        <!-- COLUMN 1 -->
 
         <div class="footer-column">
 
@@ -1101,58 +1455,64 @@ footer {
                 Digital Queue
             </p>
 
-            <p>
+            <p data-key="rights">
                 © 2026 All Rights Reserved
             </p>
 
         </div>
 
 
+        <!-- COLUMN 2 -->
+
         <div class="footer-column">
 
-            <h3>
+            <h3 data-key="importantLinks">
                 Important Links
             </h3>
 
-            <a href="#">
+            <a href="#" data-key="about">
                 About Us
             </a>
 
-            <a href="#">
+            <a href="#" data-key="terms">
                 Terms & Conditions
             </a>
 
-            <a href="#">
+            <a href="#" data-key="privacy">
                 Privacy Policy
             </a>
 
         </div>
 
 
+        <!-- COLUMN 3 -->
+
         <div class="footer-column">
 
-            <h3>
+            <h3 data-key="support">
                 Support
             </h3>
 
-            <a href="#">
+            <a href="#" data-key="helpCenter">
                 Help Center
             </a>
 
-            <a href="#">
+            <a href="#" data-key="faqs">
                 FAQs
             </a>
 
-            <a href="#">
+            <a href="#" data-key="contact">
                 Contact Us
             </a>
 
         </div>
 
 
+        <!-- COLUMN 4 -->
+
         <div class="footer-column">
 
-            <h3>
+            <h3 data-key="follow">
                 Follow Us
             </h3>
 
@@ -1171,9 +1531,11 @@ footer {
         </div>
 
 
+        <!-- COLUMN 5 -->
+
         <div class="footer-column">
 
-            <h3>
+            <h3 data-key="download">
                 Download Our App
             </h3>
 
@@ -1194,7 +1556,9 @@ footer {
     <div class="footer-bottom">
 
         © 2026 Digital Queue.
-        All Rights Reserved.
+        <span data-key="allRights">
+            All Rights Reserved.
+        </span>
 
     </div>
 
@@ -1203,48 +1567,615 @@ footer {
 
 
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
+
+/* =====================================================
+   TRANSLATIONS
+===================================================== */
+
+const translations = {
+
+    en: {
+
+        government: "Government of India",
+        tagline: "Easy. Quick. Transparent.",
+
+        searchPlaceholder:
+            "Search services, documents, offices...",
+
+        notifications: "Notifications",
+
+        notification1:
+            "Your application status has been updated.",
+
+        notification2:
+            "Queue confirmation is required before visiting the office.",
+
+        notification3:
+            "Check available government services.",
+
+        loginProfile: "Login / Profile",
+
+        home: "Home",
+        services: "Services",
+        applications: "My Applications",
+        queue: "Queue Status",
+        offices: "Offices",
+        contact: "Contact Us",
+        help: "Help",
+
+        governmentServices:
+            "Government Services",
+
+        availableServices:
+            "Available Services",
+
+        serviceDescription:
+            "Select the service you require and click Apply to continue with your application.",
+
+        documents: "Documents:",
+        requiredFor: "Required for:",
+        eligibility: "Eligibility:",
+        apply: "Apply",
+
+        aadhaar: "Aadhaar Card",
+
+        aadhaarDescription:
+            "Apply for Aadhaar related services, updates and corrections.",
+
+        aadhaarDocuments:
+            "Identity proof and address proof.",
+
+        aadhaarRequired:
+            "Citizens requiring Aadhaar services.",
+
+        aadhaarEligibility:
+            "Indian residents eligible for Aadhaar.",
+
+        pan: "PAN Card",
+
+        panDescription:
+            "Apply for a new PAN card or PAN related services.",
+
+        panDocuments:
+            "Identity proof and date of birth proof.",
+
+        panRequired:
+            "Citizens requiring PAN services.",
+
+        panEligibility:
+            "Eligible Indian citizens and entities.",
+
+        ration: "Ration Card",
+
+        rationDescription:
+            "Apply for a new ration card or update existing ration card details.",
+
+        rationDocuments:
+            "Identity and family-related documents.",
+
+        rationRequired:
+            "Eligible households.",
+
+        rationEligibility:
+            "As per applicable government rules.",
+
+        birth: "Birth Certificate",
+
+        birthDescription:
+            "Apply for a birth certificate or related corrections.",
+
+        birthDocuments:
+            "Birth and identity related documents.",
+
+        birthRequired:
+            "Parents or authorized applicants.",
+
+        birthEligibility:
+            "Applicants eligible under registration rules.",
+
+        caste: "Caste Certificate",
+
+        casteDescription:
+            "Apply for a caste certificate for official purposes.",
+
+        casteDocuments:
+            "Identity and supporting caste documents.",
+
+        casteRequired:
+            "Eligible applicants requiring certification.",
+
+        casteEligibility:
+            "As per applicable government rules.",
+
+        income: "Income Certificate",
+
+        incomeDescription:
+            "Apply for an income certificate for official and government purposes.",
+
+        incomeDocuments:
+            "Identity and income-related documents.",
+
+        incomeRequired:
+            "Applicants requiring income verification.",
+
+        incomeEligibility:
+            "Eligible residents as per applicable rules.",
+
+        noServices:
+            "No services found.",
+
+        trySearch:
+            "Try searching for another service, document or keyword.",
+
+        importantLinks:
+            "Important Links",
+
+        about: "About Us",
+        terms: "Terms & Conditions",
+        privacy: "Privacy Policy",
+
+        support: "Support",
+        helpCenter: "Help Center",
+        faqs: "FAQs",
+
+        follow: "Follow Us",
+        download: "Download Our App",
+
+        rights:
+            "© 2026 All Rights Reserved",
+
+        allRights:
+            "All Rights Reserved."
+
+    },
+
+
+    hi: {
+
+        government: "भारत सरकार",
+        tagline: "आसान। त्वरित। पारदर्शी।",
+
+        searchPlaceholder:
+            "सेवाएँ, दस्तावेज़, कार्यालय खोजें...",
+
+        notifications: "सूचनाएँ",
+
+        notification1:
+            "आपके आवेदन की स्थिति अपडेट की गई है।",
+
+        notification2:
+            "कार्यालय जाने से पहले कतार की पुष्टि आवश्यक है।",
+
+        notification3:
+            "उपलब्ध सरकारी सेवाएँ देखें।",
+
+        loginProfile:
+            "लॉगिन / प्रोफ़ाइल",
+
+        home: "होम",
+        services: "सेवाएँ",
+        applications: "मेरे आवेदन",
+        queue: "कतार स्थिति",
+        offices: "कार्यालय",
+        contact: "संपर्क करें",
+        help: "सहायता",
+
+        governmentServices:
+            "सरकारी सेवाएँ",
+
+        availableServices:
+            "उपलब्ध सेवाएँ",
+
+        serviceDescription:
+            "अपनी आवश्यक सेवा चुनें और आवेदन जारी रखने के लिए आवेदन करें पर क्लिक करें।",
+
+        documents: "दस्तावेज़:",
+        requiredFor: "आवश्यकता:",
+        eligibility: "पात्रता:",
+        apply: "आवेदन करें",
+
+        aadhaar: "आधार कार्ड",
+
+        aadhaarDescription:
+            "आधार से संबंधित सेवाओं, अपडेट और सुधार के लिए आवेदन करें।",
+
+        aadhaarDocuments:
+            "पहचान प्रमाण और पता प्रमाण।",
+
+        aadhaarRequired:
+            "आधार सेवा की आवश्यकता वाले नागरिक।",
+
+        aadhaarEligibility:
+            "आधार के लिए पात्र भारतीय निवासी।",
+
+        pan: "पैन कार्ड",
+
+        panDescription:
+            "नए पैन कार्ड या पैन से संबंधित सेवाओं के लिए आवेदन करें।",
+
+        panDocuments:
+            "पहचान प्रमाण और जन्म तिथि प्रमाण।",
+
+        panRequired:
+            "पैन सेवा की आवश्यकता वाले नागरिक।",
+
+        panEligibility:
+            "पात्र भारतीय नागरिक और संस्थाएँ।",
+
+        ration: "राशन कार्ड",
+
+        rationDescription:
+            "नए राशन कार्ड के लिए आवेदन करें या मौजूदा विवरण अपडेट करें।",
+
+        rationDocuments:
+            "पहचान और परिवार से संबंधित दस्तावेज़।",
+
+        rationRequired:
+            "पात्र परिवार।",
+
+        rationEligibility:
+            "लागू सरकारी नियमों के अनुसार।",
+
+        birth: "जन्म प्रमाण पत्र",
+
+        birthDescription:
+            "जन्म प्रमाण पत्र या संबंधित सुधार के लिए आवेदन करें।",
+
+        birthDocuments:
+            "जन्म और पहचान से संबंधित दस्तावेज़।",
+
+        birthRequired:
+            "माता-पिता या अधिकृत आवेदक।",
+
+        birthEligibility:
+            "पंजीकरण नियमों के अंतर्गत पात्र आवेदक।",
+
+        caste: "जाति प्रमाण पत्र",
+
+        casteDescription:
+            "आधिकारिक उद्देश्यों के लिए जाति प्रमाण पत्र हेतु आवेदन करें।",
+
+        casteDocuments:
+            "पहचान और संबंधित जाति दस्तावेज़।",
+
+        casteRequired:
+            "प्रमाण पत्र की आवश्यकता वाले पात्र आवेदक।",
+
+        casteEligibility:
+            "लागू सरकारी नियमों के अनुसार।",
+
+        income: "आय प्रमाण पत्र",
+
+        incomeDescription:
+            "आधिकारिक और सरकारी उद्देश्यों के लिए आय प्रमाण पत्र हेतु आवेदन करें।",
+
+        incomeDocuments:
+            "पहचान और आय से संबंधित दस्तावेज़।",
+
+        incomeRequired:
+            "आय सत्यापन की आवश्यकता वाले आवेदक।",
+
+        incomeEligibility:
+            "लागू नियमों के अनुसार पात्र निवासी।",
+
+        noServices:
+            "कोई सेवा नहीं मिली।",
+
+        trySearch:
+            "किसी अन्य सेवा, दस्तावेज़ या शब्द को खोजें।",
+
+        importantLinks:
+            "महत्वपूर्ण लिंक",
+
+        about: "हमारे बारे में",
+        terms: "नियम एवं शर्तें",
+        privacy: "गोपनीयता नीति",
+
+        support: "सहायता",
+        helpCenter: "सहायता केंद्र",
+        faqs: "सामान्य प्रश्न",
+
+        follow: "हमें फॉलो करें",
+        download: "हमारा ऐप डाउनलोड करें",
+
+        rights:
+            "© 2026 सर्वाधिकार सुरक्षित",
+
+        allRights:
+            "सर्वाधिकार सुरक्षित।"
+
+    },
+
+
+    gu: {
+
+        government: "ભારત સરકાર",
+        tagline: "સરળ. ઝડપી. પારદર્શક.",
+
+        searchPlaceholder:
+            "સેવાઓ, દસ્તાવેજો, કચેરીઓ શોધો...",
+
+        notifications: "સૂચનાઓ",
+
+        notification1:
+            "તમારી અરજીની સ્થિતિ અપડેટ કરવામાં આવી છે.",
+
+        notification2:
+            "કચેરીની મુલાકાત પહેલાં કતારની પુષ્ટિ જરૂરી છે.",
+
+        notification3:
+            "ઉપલબ્ધ સરકારી સેવાઓ તપાસો.",
+
+        loginProfile:
+            "લૉગિન / પ્રોફાઇલ",
+
+        home: "હોમ",
+        services: "સેવાઓ",
+        applications: "મારી અરજીઓ",
+        queue: "કતાર સ્થિતિ",
+        offices: "કચેરીઓ",
+        contact: "સંપર્ક કરો",
+        help: "મદદ",
+
+        governmentServices:
+            "સરકારી સેવાઓ",
+
+        availableServices:
+            "ઉપલબ્ધ સેવાઓ",
+
+        serviceDescription:
+            "તમને જરૂરી સેવા પસંદ કરો અને અરજી ચાલુ રાખવા માટે અરજી કરો પર ક્લિક કરો.",
+
+        documents: "દસ્તાવેજો:",
+        requiredFor: "આવશ્યકતા:",
+        eligibility: "પાત્રતા:",
+        apply: "અરજી કરો",
+
+        aadhaar: "આધાર કાર્ડ",
+
+        aadhaarDescription:
+            "આધાર સંબંધિત સેવાઓ, અપડેટ અને સુધારા માટે અરજી કરો.",
+
+        aadhaarDocuments:
+            "ઓળખનો પુરાવો અને સરનામાનો પુરાવો.",
+
+        aadhaarRequired:
+            "આધાર સેવાની જરૂરિયાત ધરાવતા નાગરિકો.",
+
+        aadhaarEligibility:
+            "આધાર માટે પાત્ર ભારતીય રહેવાસીઓ.",
+
+        pan: "પાન કાર્ડ",
+
+        panDescription:
+            "નવા પાન કાર્ડ અથવા પાન સંબંધિત સેવાઓ માટે અરજી કરો.",
+
+        panDocuments:
+            "ઓળખનો પુરાવો અને જન્મ તારીખનો પુરાવો.",
+
+        panRequired:
+            "પાન સેવાની જરૂરિયાત ધરાવતા નાગરિકો.",
+
+        panEligibility:
+            "પાત્ર ભારતીય નાગરિકો અને સંસ્થાઓ.",
+
+        ration: "રેશન કાર્ડ",
+
+        rationDescription:
+            "નવા રેશન કાર્ડ માટે અરજી કરો અથવા હાલની વિગતો અપડેટ કરો.",
+
+        rationDocuments:
+            "ઓળખ અને પરિવાર સંબંધિત દસ્તાવેજો.",
+
+        rationRequired:
+            "પાત્ર પરિવારો.",
+
+        rationEligibility:
+            "લાગુ સરકારી નિયમો અનુસાર.",
+
+        birth: "જન્મ પ્રમાણપત્ર",
+
+        birthDescription:
+            "જન્મ પ્રમાણપત્ર અથવા સંબંધિત સુધારા માટે અરજી કરો.",
+
+        birthDocuments:
+            "જન્મ અને ઓળખ સંબંધિત દસ્તાવેજો.",
+
+        birthRequired:
+            "માતા-પિતા અથવા અધિકૃત અરજદારો.",
+
+        birthEligibility:
+            "નોંધણીના નિયમો હેઠળ પાત્ર અરજદારો.",
+
+        caste: "જાતિ પ્રમાણપત્ર",
+
+        casteDescription:
+            "સત્તાવાર હેતુઓ માટે જાતિ પ્રમાણપત્ર માટે અરજી કરો.",
+
+        casteDocuments:
+            "ઓળખ અને જાતિ સંબંધિત દસ્તાવેજો.",
+
+        casteRequired:
+            "પ્રમાણપત્રની જરૂરિયાત ધરાવતા પાત્ર અરજદારો.",
+
+        casteEligibility:
+            "લાગુ સરકારી નિયમો અનુસાર.",
+
+        income: "આવક પ્રમાણપત્ર",
+
+        incomeDescription:
+            "સત્તાવાર અને સરકારી હેતુઓ માટે આવક પ્રમાણપત્ર માટે અરજી કરો.",
+
+        incomeDocuments:
+            "ઓળખ અને આવક સંબંધિત દસ્તાવેજો.",
+
+        incomeRequired:
+            "આવક ચકાસણીની જરૂરિયાત ધરાવતા અરજદારો.",
+
+        incomeEligibility:
+            "લાગુ નિયમો અનુસાર પાત્ર રહેવાસીઓ.",
+
+        noServices:
+            "કોઈ સેવા મળી નથી.",
+
+        trySearch:
+            "બીજી સેવા, દસ્તાવેજ અથવા શબ્દ શોધવાનો પ્રયાસ કરો.",
+
+        importantLinks:
+            "મહત્વપૂર્ણ લિંક્સ",
+
+        about: "અમારા વિશે",
+        terms: "નિયમો અને શરતો",
+        privacy: "ગોપનીયતા નીતિ",
+
+        support: "સહાય",
+        helpCenter: "સહાય કેન્દ્ર",
+        faqs: "વારંવાર પૂછાતા પ્રશ્નો",
+
+        follow: "અમને ફોલો કરો",
+        download: "અમારી એપ ડાઉનલોડ કરો",
+
+        rights:
+            "© 2026 સર્વાધિકાર સુરક્ષિત",
+
+        allRights:
+            "સર્વાધિકાર સુરક્ષિત."
+
+    }
+
+};
 
 
 /* =====================================================
-   GET SEARCH ELEMENTS
+   LANGUAGE CHANGE
+===================================================== */
+
+function changeLanguage(language) {
+
+    localStorage.setItem(
+        "selectedLanguage",
+        language
+    );
+
+    applyLanguage(language);
+}
+
+
+/* =====================================================
+   APPLY LANGUAGE
+===================================================== */
+
+function applyLanguage(language) {
+
+    const languageData =
+        translations[language];
+
+    if (!languageData) {
+        return;
+    }
+
+
+    document
+        .querySelectorAll("[data-key]")
+        .forEach(function(element) {
+
+            const key =
+                element.getAttribute("data-key");
+
+            if (
+                languageData[key] !== undefined
+            ) {
+
+                element.textContent =
+                    languageData[key];
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll("[data-placeholder]")
+        .forEach(function(element) {
+
+            const key =
+                element.getAttribute(
+                    "data-placeholder"
+                );
+
+            if (
+                languageData[key] !== undefined
+            ) {
+
+                element.placeholder =
+                    languageData[key];
+
+            }
+
+        });
+
+
+    document.documentElement.lang =
+        language === "hi"
+            ? "hi"
+            : language === "gu"
+                ? "gu"
+                : "en";
+
+}
+
+
+/* =====================================================
+   LOAD SAVED LANGUAGE
+===================================================== */
+
+const savedLanguage =
+    localStorage.getItem(
+        "selectedLanguage"
+    ) || "en";
+
+
+document.getElementById(
+    "languageSelect"
+).value = savedLanguage;
+
+
+applyLanguage(savedLanguage);
+
+
+/* =====================================================
+   SEARCH
 ===================================================== */
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const serviceCards =
-    document.querySelectorAll(".service-card");
+    document.querySelectorAll(
+        ".service-card"
+    );
 
 const searchResult =
-    document.getElementById("searchResult");
+    document.getElementById(
+        "searchResult"
+    );
 
 const noResult =
-    document.getElementById("noResult");
+    document.getElementById(
+        "noResult"
+    );
 
-
-/* =====================================================
-   SEARCH WHILE TYPING
-===================================================== */
 
 searchInput.addEventListener(
     "input",
-    function() {
-
-        performSearch();
-
-    }
+    performSearch
 );
 
 
-/* =====================================================
-   SEARCH FUNCTION
-===================================================== */
-
 function performSearch() {
-
 
     const searchText =
         searchInput.value
@@ -1255,44 +2186,38 @@ function performSearch() {
     let foundServices = 0;
 
 
-    /* ================= EMPTY SEARCH ================= */
-
     if (searchText === "") {
-
 
         serviceCards.forEach(
             function(card) {
 
                 card.style.display =
-                    "block";
+                    "flex";
 
             }
         );
 
-
         searchResult.style.display =
             "none";
-
 
         noResult.style.display =
             "none";
 
-
         return;
-
     }
 
-
-    /* ================= SEARCH ================= */
 
     serviceCards.forEach(
         function(card) {
 
-
             const searchableText =
-                card
-                .getAttribute("data-search")
-                .toLowerCase();
+                (
+                    card.innerText +
+                    " " +
+                    card.getAttribute(
+                        "data-search"
+                    )
+                ).toLowerCase();
 
 
             if (
@@ -1301,16 +2226,12 @@ function performSearch() {
                 )
             ) {
 
-
                 card.style.display =
-                    "block";
-
+                    "flex";
 
                 foundServices++;
 
-
             } else {
-
 
                 card.style.display =
                     "none";
@@ -1321,39 +2242,23 @@ function performSearch() {
     );
 
 
-    /* ================= RESULTS FOUND ================= */
-
     if (foundServices > 0) {
-
 
         searchResult.style.display =
             "block";
 
-
         searchResult.innerHTML =
             "<strong>" +
             foundServices +
-            "</strong> service(s) found for " +
-            "<strong>\"" +
-            searchInput.value +
-            "\"</strong>";
-
+            "</strong> service(s) found.";
 
         noResult.style.display =
             "none";
 
-
-    }
-
-
-    /* ================= NO RESULTS ================= */
-
-    else {
-
+    } else {
 
         searchResult.style.display =
             "none";
-
 
         noResult.style.display =
             "block";
@@ -1364,11 +2269,61 @@ function performSearch() {
 
 
 /* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
+function toggleNotifications() {
+
+    const panel =
+        document.getElementById(
+            "notificationPanel"
+        );
+
+    panel.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE NOTIFICATIONS
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const wrapper =
+            document.querySelector(
+                ".notification-wrapper"
+            );
+
+        const panel =
+            document.getElementById(
+                "notificationPanel"
+            );
+
+
+        if (
+            !wrapper.contains(event.target)
+        ) {
+
+            panel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    APPLY SERVICE
 ===================================================== */
 
 function applyService(service) {
-
 
     const isLoggedIn =
         localStorage.getItem(
@@ -1376,12 +2331,9 @@ function applyService(service) {
         );
 
 
-    /* ================= LOGGED IN ================= */
-
     if (
         isLoggedIn === "true"
     ) {
-
 
         window.location.href =
             "application.html?service=" +
@@ -1389,13 +2341,9 @@ function applyService(service) {
                 service
             );
 
-
         return;
-
     }
 
-
-    /* ================= NOT LOGGED IN ================= */
 
     localStorage.setItem(
         "requestedService",
@@ -1415,7 +2363,6 @@ function applyService(service) {
 
 function openProfile() {
 
-
     const isLoggedIn =
         localStorage.getItem(
             "isLoggedIn"
@@ -1426,14 +2373,11 @@ function openProfile() {
         isLoggedIn === "true"
     ) {
 
-
         alert(
             "You are already logged in."
         );
 
-
     } else {
-
 
         window.location.href =
             "login.html";
